@@ -367,13 +367,19 @@
                 </div>
 
                 <div class="contact__form-wrapper">
-                    <form class="contact-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="e8ef9f8e-9311-4646-bd13-b67c14925696">
+                        <input type="hidden" name="from_name" value="Encodius Contact Form">
+                        <input type="hidden" name="subject" value="New Contact from Encodius Website">
+                        <input type="hidden" name="redirect" value="https://encodius.com/#contact">
+                        <!-- Honeypot spam protection -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
                         <div class="form-group">
-                            <label for="subject" class="form-label" data-i18n="contact.form.subject">Subject</label>
+                            <label for="topic" class="form-label" data-i18n="contact.form.subject">Subject</label>
                             <input
                                 type="text"
-                                id="subject"
-                                name="subject"
+                                id="topic"
+                                name="topic"
                                 class="form-input"
                                 data-i18n-placeholder="contact.form.subjectPlaceholder"
                                 placeholder="What's this about?"

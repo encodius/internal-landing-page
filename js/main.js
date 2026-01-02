@@ -718,7 +718,9 @@ function initContactForm() {
                 }
             });
 
-            if (response.ok) {
+            const result = await response.json();
+
+            if (result.success) {
                 formStatus.textContent = 'Message sent successfully! We\'ll get back to you soon.';
                 formStatus.className = 'form-status success';
                 form.reset();
@@ -731,7 +733,7 @@ function initContactForm() {
                     ease: 'power2.out'
                 });
             } else {
-                throw new Error('Failed to send');
+                throw new Error(result.message || 'Failed to send');
             }
         } catch (error) {
             formStatus.textContent = 'Something went wrong. Please try again or email us directly.';
