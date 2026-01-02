@@ -1,0 +1,6 @@
+# Encodius robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://encodius.com/sitemap.xml
