@@ -36,6 +36,7 @@
     position: absolute;
     border-radius: 50%;
     filter: blur(100px);
+    will-change: transform, opacity;
     opacity: 0.5;
 }
 
@@ -66,6 +67,31 @@
     position: absolute;
     border-radius: var(--radius-md);
     opacity: 0.6;
+    will-change: transform;
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Stagger animations - shape-1 needs custom animation to preserve 45deg rotation */
+.shape-1 { animation: float-rotated 6s ease-in-out infinite; animation-delay: 0s; }
+.shape-2 { animation-delay: -1.5s; }
+.shape-3 { animation-delay: -3s; }
+.shape-4 { animation-delay: -4.5s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes float-rotated {
+    0%, 100% { transform: translateY(0) rotate(45deg); }
+    50% { transform: translateY(-15px) rotate(48deg); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .floating-shape {
+        animation: none;
+    }
 }
 
 .shape-1 {
@@ -190,6 +216,8 @@
 }
 
 .code-window {
+    --glow-opacity: 0.1;
+    position: relative;
     width: 100%;
     max-width: 450px;
     background: var(--color-bg-secondary);
@@ -198,8 +226,20 @@
     overflow: hidden;
     box-shadow:
         0 0 0 1px rgba(0, 212, 255, 0.1),
-        0 20px 50px rgba(0, 0, 0, 0.5),
-        0 0 100px rgba(0, 212, 255, 0.1);
+        0 20px 50px rgba(0, 0, 0, 0.5);
+    will-change: transform;
+}
+
+/* GPU-accelerated glow effect using pseudo-element */
+.code-window::after {
+    content: '';
+    position: absolute;
+    inset: -50px;
+    background: radial-gradient(circle at center, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+    opacity: var(--glow-opacity);
+    pointer-events: none;
+    z-index: -1;
+    will-change: opacity;
 }
 
 .code-window__header {
@@ -521,8 +561,8 @@
     }
 
     .hero {
-        min-height: auto;
-        padding: 120px 0 60px;
+        min-height: 100vh;
+        padding: 100px 0 60px;
     }
 
     .hero__visual {

@@ -72,7 +72,7 @@ function initLoader() {
     .to('.hero__scroll', {
         opacity: 1,
         duration: 0.6,
-        ease: 'power2.out'
+        ease: 'sine.out'
     }, '-=0.4');
 }
 
@@ -80,59 +80,51 @@ function initLoader() {
 // HERO ANIMATIONS
 // ============================================
 function initHeroAnimations() {
-    // Parallax effect on mouse move
+    // Skip on mobile - hero visual elements are hidden
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (isMobile) return;
+
+    // Respect reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const hero = document.querySelector('.hero');
-    const shapes = document.querySelectorAll('.floating-shape');
     const codeWindow = document.querySelector('.code-window');
 
-    if (!hero) return;
+    if (!hero || !codeWindow) return;
+
+    // Throttle mousemove to reduce CPU usage
+    let lastMove = 0;
+    const throttleMs = 50;
 
     hero.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if (now - lastMove < throttleMs) return;
+        lastMove = now;
+
         const { clientX, clientY } = e;
         const { innerWidth, innerHeight } = window;
 
         const xPercent = (clientX / innerWidth - 0.5) * 2;
         const yPercent = (clientY / innerHeight - 0.5) * 2;
 
-        // Move shapes
-        shapes.forEach((shape, index) => {
-            const speed = (index + 1) * 10;
-            gsap.to(shape, {
-                x: xPercent * speed,
-                y: yPercent * speed,
-                duration: 0.5,
-                ease: 'power2.out'
-            });
+        gsap.to(codeWindow, {
+            rotateY: xPercent * 3,
+            rotateX: -yPercent * 3,
+            duration: 0.3,
+            ease: 'sine.out',
+            overwrite: 'auto'
         });
-
-        // Subtle code window movement
-        if (codeWindow) {
-            gsap.to(codeWindow, {
-                rotateY: xPercent * 5,
-                rotateX: -yPercent * 5,
-                duration: 0.5,
-                ease: 'power2.out'
-            });
-        }
     });
 
-    // Reset on mouse leave
     hero.addEventListener('mouseleave', () => {
-        gsap.to(shapes, {
-            x: 0,
-            y: 0,
-            duration: 0.8,
-            ease: 'power2.out'
+        gsap.to(codeWindow, {
+            rotateY: 0,
+            rotateX: 0,
+            duration: 0.5,
+            ease: 'sine.out',
+            overwrite: 'auto'
         });
-
-        if (codeWindow) {
-            gsap.to(codeWindow, {
-                rotateY: 0,
-                rotateX: 0,
-                duration: 0.8,
-                ease: 'power2.out'
-            });
-        }
     });
 
     // Glow pulsing animation
@@ -157,36 +149,25 @@ function initHeroAnimations() {
 }
 
 // ============================================
-// FLOATING SHAPES ANIMATION
-// ============================================
-function initFloatingShapes() {
-    const shapes = document.querySelectorAll('.floating-shape');
-
-    shapes.forEach((shape, index) => {
-        // Continuous floating animation
-        gsap.to(shape, {
-            y: 'random(-30, 30)',
-            x: 'random(-20, 20)',
-            rotation: 'random(-15, 15)',
-            duration: 'random(3, 5)',
-            repeat: -1,
-            yoyo: true,
-            ease: 'sine.inOut',
-            delay: index * 0.2
-        });
-    });
-}
-
-// ============================================
 // CODE WINDOW ANIMATION
 // ============================================
 function initCodeWindowAnimation() {
+    // Skip on mobile - code window is hidden
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (isMobile) return;
+
+    // Respect reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const codeLines = document.querySelectorAll('.code-window__body code > span');
 
     if (!codeLines.length) return;
 
-    // Typing effect simulation with highlighting
-    gsap.set(codeLines, { opacity: 0.3 });
+    // Set initial state - full opacity if reduced motion
+    gsap.set(codeLines, { opacity: prefersReducedMotion ? 1 : 0.3 });
+
+    // Skip animations if reduced motion is preferred
+    if (prefersReducedMotion) return;
 
     const highlightTimeline = gsap.timeline({ repeat: -1, repeatDelay: 2 });
 
@@ -199,18 +180,21 @@ function initCodeWindowAnimation() {
         .to(line, {
             opacity: 0.3,
             duration: 0.3,
-            ease: 'power2.out'
+            ease: 'sine.out'
         }, (index * 0.15) + 0.8);
     });
 
-    // Subtle glow effect on the code window
-    gsap.to('.code-window', {
-        boxShadow: '0 0 0 1px rgba(0, 212, 255, 0.2), 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 120px rgba(0, 212, 255, 0.15)',
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut'
-    });
+    // Subtle glow effect
+    const codeWindowEl = document.querySelector('.code-window');
+    if (codeWindowEl) {
+        gsap.to(codeWindowEl, {
+            '--glow-opacity': 0.15,
+            duration: 2,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+        });
+    }
 }
 
 // ============================================
@@ -222,7 +206,7 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.services',
             start: 'top 80%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
         },
         opacity: 0,
         y: 30,
@@ -234,21 +218,20 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.services .section-title',
             start: 'top 80%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
         },
         opacity: 0,
-        y: 60,
-        rotateX: -30,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power3.out'
+        y: 40,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: 'sine.out'
     });
 
     gsap.from('.services .section-description', {
         scrollTrigger: {
             trigger: '.services .section-description',
             start: 'top 85%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
         },
         opacity: 0,
         y: 40,
@@ -256,24 +239,25 @@ function initScrollAnimations() {
         ease: 'power3.out'
     });
 
-    // Service cards - staggered entrance from different directions
+    // Service cards
     const serviceCards = document.querySelectorAll('.service-card');
 
     serviceCards.forEach((card, index) => {
-        const direction = index % 2 === 0 ? -1 : 1;
-
         gsap.from(card, {
             scrollTrigger: {
                 trigger: card,
                 start: 'top 85%',
-                toggleActions: 'play none none reverse'
+                toggleActions: 'play none none none'
             },
             opacity: 0,
-            x: direction * 80,
-            rotateY: direction * 10,
-            duration: 0.8,
-            delay: (index % 2) * 0.15,
-            ease: 'power3.out'
+            x: 60,
+            duration: 0.7,
+            delay: (index % 2) * 0.1,
+            ease: 'sine.out',
+            onComplete: () => {
+                gsap.set(card, { clearProps: 'transform,opacity' });
+                card.classList.add('gsap-done');
+            }
         });
     });
 
@@ -282,7 +266,7 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.about',
             start: 'top 70%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
         },
         opacity: 0,
         x: -50,
@@ -294,7 +278,7 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.about .section-title',
             start: 'top 75%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
         },
         opacity: 0,
         x: -80,
@@ -307,7 +291,7 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.about__text',
             start: 'top 80%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
         },
         opacity: 0,
         y: 40,
@@ -316,7 +300,7 @@ function initScrollAnimations() {
         ease: 'power3.out'
     });
 
-    // Value cards - slide in from right with stagger
+    // Value cards
     const valueCards = document.querySelectorAll('.value-card');
 
     valueCards.forEach((card, index) => {
@@ -324,14 +308,17 @@ function initScrollAnimations() {
             scrollTrigger: {
                 trigger: card,
                 start: 'top 85%',
-                toggleActions: 'play none none reverse'
+                toggleActions: 'play none none none'
             },
             opacity: 0,
-            x: 100,
-            rotateY: -15,
-            duration: 0.8,
-            delay: index * 0.15,
-            ease: 'power3.out'
+            x: 60,
+            duration: 0.7,
+            delay: index * 0.1,
+            ease: 'sine.out',
+            onComplete: () => {
+                gsap.set(card, { clearProps: 'transform,opacity' });
+                card.classList.add('gsap-done');
+            }
         });
 
         // Animate the number
@@ -341,7 +328,7 @@ function initScrollAnimations() {
                 scrollTrigger: {
                     trigger: card,
                     start: 'top 85%',
-                    toggleActions: 'play none none reverse'
+                    toggleActions: 'play none none none'
                 },
                 opacity: 0,
                 scale: 0,
@@ -357,7 +344,7 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.about',
             start: 'top 80%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
         },
         scaleY: 0,
         transformOrigin: 'top',
@@ -371,7 +358,7 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.contact',
             start: 'top 70%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
         },
         opacity: 0,
         y: 30,
@@ -383,21 +370,20 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.contact .section-title',
             start: 'top 75%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
         },
         opacity: 0,
-        y: 60,
-        rotateX: -30,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power3.out'
+        y: 40,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: 'sine.out'
     });
 
     gsap.from('.contact__description', {
         scrollTrigger: {
             trigger: '.contact__description',
             start: 'top 85%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
         },
         opacity: 0,
         y: 30,
@@ -405,38 +391,29 @@ function initScrollAnimations() {
         ease: 'power3.out'
     });
 
-    gsap.from('.contact__detail', {
-        scrollTrigger: {
-            trigger: '.contact__details',
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
-        },
-        opacity: 0,
-        x: -30,
-        duration: 0.6,
-        ease: 'power3.out'
-    });
-
     // Contact form animation
-    gsap.from('.contact__form-wrapper', {
-        scrollTrigger: {
-            trigger: '.contact__form-wrapper',
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-        },
-        opacity: 0,
-        x: 100,
-        rotateY: -10,
-        duration: 1,
-        ease: 'power3.out'
-    });
+    const formWrapper = document.querySelector('.contact__form-wrapper');
+    if (formWrapper) {
+        gsap.from(formWrapper, {
+            scrollTrigger: {
+                trigger: formWrapper,
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 0,
+            x: 60,
+            duration: 0.7,
+            ease: 'sine.out',
+            onComplete: () => gsap.set(formWrapper, { clearProps: 'transform,opacity' })
+        });
+    }
 
     // Form elements stagger
     gsap.from('.form-group', {
         scrollTrigger: {
             trigger: '.contact-form',
             start: 'top 80%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
         },
         opacity: 0,
         y: 30,
@@ -450,7 +427,7 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.contact-form',
             start: 'top 75%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
         },
         opacity: 0,
         y: 30,
@@ -465,7 +442,7 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.footer',
             start: 'top 90%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
         },
         opacity: 0,
         y: 40,
@@ -478,6 +455,5 @@ function initScrollAnimations() {
 // Expose functions globally
 window.initLoader = initLoader;
 window.initHeroAnimations = initHeroAnimations;
-window.initFloatingShapes = initFloatingShapes;
 window.initCodeWindowAnimation = initCodeWindowAnimation;
 window.initScrollAnimations = initScrollAnimations;

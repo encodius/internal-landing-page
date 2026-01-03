@@ -17,10 +17,9 @@
 }
 
 .header.scrolled {
-    background: rgba(10, 15, 28, 0.9);
+    background: rgba(10, 15, 28, 0.95);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--color-border);
-    padding: 12px 0;
 }
 
 .nav {

@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initLoader();
     initHeroAnimations();
     initScrollAnimations();
-    initFloatingShapes();
     initCodeWindowAnimation();
 
     // Interactions (from interactions.js)

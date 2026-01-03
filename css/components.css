@@ -154,9 +154,13 @@
     background: var(--gradient-card);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    transition: all var(--transition-base);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
     position: relative;
     overflow: hidden;
+}
+
+.service-card.gsap-done {
+    transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
 }
 
 .service-card::before {
@@ -260,7 +264,11 @@
     border-radius: var(--radius-lg);
     position: relative;
     overflow: hidden;
-    transition: all var(--transition-base);
+    transition: border-color var(--transition-base);
+}
+
+.value-card.gsap-done {
+    transition: border-color var(--transition-base), transform var(--transition-base);
 }
 
 .value-card:hover {
