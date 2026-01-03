@@ -9,12 +9,17 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://encodius.com/">
 
+    <!-- Language alternates -->
+    <link rel="alternate" hreflang="en" href="https://encodius.com/">
+    <link rel="alternate" hreflang="sr" href="https://encodius.com/">
+    <link rel="alternate" hreflang="x-default" href="https://encodius.com/">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://encodius.com/">
     <meta property="og:title" content="Encodius | Fintech & Software Engineering Experts">
     <meta property="og:description" content="Expert software engineering for fintech, banking, web, and mobile solutions. Building the future of financial technology.">
-    <meta property="og:image" content="https://encodius.com/og-image.png">
+    <meta property="og:image" content="https://encodius.com/assets/images/og-image.png">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="sr_RS">
 
@@ -23,19 +28,22 @@
     <meta name="twitter:url" content="https://encodius.com/">
     <meta name="twitter:title" content="Encodius | Fintech & Software Engineering Experts">
     <meta name="twitter:description" content="Expert software engineering for fintech, banking, web, and mobile solutions. Building the future of financial technology.">
-    <meta name="twitter:image" content="https://encodius.com/og-image.png">
+    <meta name="twitter:image" content="https://encodius.com/assets/images/og-image.png">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/icons/favicon.svg">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/sections.css">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -66,7 +74,7 @@
             <a href="#hero" class="nav__logo">
                 <span class="logo-text">Encodius</span>
             </a>
-            <ul class="nav__menu" id="nav-menu">
+            <ul class="nav__menu">
                 <li class="nav__item">
                     <a href="#services" class="nav__link" data-i18n="nav.services">Services</a>
                 </li>
@@ -91,13 +99,28 @@
                     </svg>
                 </button>
             </div>
-            <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="nav__toggle" id="nav-toggle" aria-label="Open menu">
+                <img src="assets/icons/hamburger.svg" alt="">
             </button>
         </nav>
     </header>
+    <div class="nav__backdrop" id="nav-backdrop"></div>
+    <div class="nav__mobile" id="nav-mobile">
+        <button class="nav__mobile-close" id="nav-mobile-close" aria-label="Close menu">
+            <img src="assets/icons/close.svg" alt="">
+        </button>
+        <ul class="nav__mobile-menu">
+            <li class="nav__item">
+                <a href="#services" class="nav__link" data-i18n="nav.services">Services</a>
+            </li>
+            <li class="nav__item">
+                <a href="#about" class="nav__link" data-i18n="nav.about">About</a>
+            </li>
+            <li class="nav__item">
+                <a href="#contact" class="nav__link nav__link--cta" data-i18n="nav.contact">Contact</a>
+            </li>
+        </ul>
+    </div>
 
     <!-- Hero Section -->
     <main id="main-content" tabindex="-1">
@@ -106,7 +129,6 @@
             <div class="hero__grid"></div>
             <div class="hero__glow hero__glow--1"></div>
             <div class="hero__glow hero__glow--2"></div>
-            <div class="hero__particles" id="particles"></div>
         </div>
 
         <div class="hero__shapes">
@@ -385,10 +407,9 @@
                                 placeholder="What's this about?"
                                 required
                             >
-                            <div class="form-input__border"></div>
                         </div>
                         <div class="form-group">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label" data-i18n="contact.form.email">Email</label>
                             <input
                                 type="email"
                                 id="email"
@@ -397,7 +418,6 @@
                                 placeholder="your@email.com"
                                 required
                             >
-                            <div class="form-input__border"></div>
                         </div>
                         <div class="form-group">
                             <label for="message" class="form-label" data-i18n="contact.form.message">Message</label>
@@ -410,7 +430,6 @@
                                 rows="5"
                                 required
                             ></textarea>
-                            <div class="form-input__border"></div>
                         </div>
                         <button type="submit" class="btn btn--primary btn--full">
                             <span data-i18n="contact.form.submit">Send Message</span>
@@ -466,9 +485,11 @@
     </footer>
 
     <!-- Scripts -->
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw==" crossorigin="anonymous"></script>
     <script defer src="js/translations.js"></script>
-    <script defer src="js/main.js"></script>
+    <script defer src="js/animations.js"></script>
+    <script defer src="js/interactions.js"></script>
+    <script defer src="js/app.js"></script>
 </body>
 </html>

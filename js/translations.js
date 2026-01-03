@@ -84,6 +84,7 @@ const translations = {
         'contact.description': "Ready to discuss your next project? We're here to help transform your vision into reality. Reach out and let's start a conversation.",
 
         // Form
+        'contact.form.email': 'Email',
         'contact.form.subject': 'Subject',
         'contact.form.subjectPlaceholder': "What's this about?",
         'contact.form.message': 'Message',
@@ -171,15 +172,16 @@ const translations = {
 
         // Contact Section
         'contact.tag': 'Stupite u Kontakt',
-        'contact.title1': 'Hajde da Izgradimo',
-        'contact.title2': 'Nešto Veliko',
-        'contact.description': 'Spremni da razgovarate o svom sledećem projektu? Tu smo da pomognemo da transformišete vašu viziju u stvarnost. Javite nam se i započnimo razgovor.',
+        'contact.title1': 'Hajde da Stvorimo',
+        'contact.title2': 'Nešto Izuzetno',
+        'contact.description': 'Želite da razgovaramo o Vašem sledećem projektu? Tu smo da pomognemo da transformišete Vašu viziju u stvarnost. Javite nam se i započnimo razgovor.',
 
         // Form
+        'contact.form.email': 'Email',
         'contact.form.subject': 'Tema',
         'contact.form.subjectPlaceholder': 'O čemu se radi?',
         'contact.form.message': 'Poruka',
-        'contact.form.messagePlaceholder': 'Recite nam o vašem projektu...',
+        'contact.form.messagePlaceholder': 'Recite nam o Vašem projektu...',
         'contact.form.submit': 'Pošalji Poruku',
 
         // Footer

@@ -1,0 +1,353 @@
+/* ============================================
+   ENCODIUS - Component Styles
+   Buttons, Forms, Cards, Animations
+   ============================================ */
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn--primary {
+    background: var(--gradient-primary);
+    color: var(--color-bg-primary);
+}
+
+.btn--primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(0, 212, 255, 0.4);
+}
+
+.btn--primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.btn--primary:hover::before {
+    opacity: 1;
+}
+
+.btn--secondary {
+    background: transparent;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+}
+
+.btn--secondary:hover {
+    border-color: var(--color-accent-primary);
+    background: rgba(0, 212, 255, 0.1);
+}
+
+.btn--full {
+    width: 100%;
+    justify-content: center;
+}
+
+.btn:focus-visible {
+    outline-offset: 4px;
+    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.3);
+}
+
+[data-theme="light"] .btn--primary {
+    color: #ffffff;
+}
+
+[data-theme="light"] .btn--primary:hover {
+    box-shadow: 0 10px 40px rgba(8, 145, 178, 0.3);
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+.form-group {
+    position: relative;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--color-text-secondary);
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1rem;
+    font-family: var(--font-primary);
+    color: var(--color-text-primary);
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+    outline: none;
+}
+
+.form-input::placeholder {
+    color: var(--color-text-muted);
+}
+
+.form-input:focus {
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+}
+
+.form-input:focus-visible {
+    outline: none;
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+}
+
+.form-input--textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-status {
+    text-align: center;
+    padding: 16px;
+    border-radius: var(--radius-md);
+    display: none;
+}
+
+.form-status.success {
+    display: block;
+    background: rgba(74, 222, 128, 0.1);
+    color: #4ade80;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.form-status.error {
+    display: block;
+    background: rgba(255, 95, 87, 0.1);
+    color: #ff5f57;
+    border: 1px solid rgba(255, 95, 87, 0.2);
+}
+
+[data-theme="light"] .form-input {
+    background: var(--color-bg-tertiary);
+}
+
+/* ============================================
+   CARDS - Service Cards
+   ============================================ */
+.service-card {
+    padding: 40px;
+    background: var(--gradient-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-base);
+}
+
+.service-card:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.service-card:hover::before {
+    transform: scaleX(1);
+}
+
+.service-card--featured {
+    grid-column: span 2;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    border-color: rgba(0, 212, 255, 0.2);
+}
+
+.service-card__icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: var(--radius-md);
+    margin-bottom: 24px;
+}
+
+.service-card__icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--color-accent-primary);
+}
+
+.service-card__title {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+}
+
+.service-card__description {
+    color: var(--color-text-secondary);
+    margin-bottom: 24px;
+}
+
+.service-card__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+}
+
+.service-card__features li {
+    padding: 6px 14px;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 50px;
+    font-size: 0.8125rem;
+    color: var(--color-accent-primary);
+}
+
+[data-theme="light"] .service-card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .service-card:hover {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .service-card--featured {
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
+}
+
+[data-theme="light"] .service-card__icon {
+    background: rgba(8, 145, 178, 0.1);
+}
+
+[data-theme="light"] .service-card__features li {
+    background: rgba(8, 145, 178, 0.1);
+}
+
+/* ============================================
+   CARDS - Value Cards
+   ============================================ */
+.value-card {
+    padding: 32px;
+    background: var(--gradient-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-base);
+}
+
+.value-card:hover {
+    border-color: var(--color-border-hover);
+    transform: translateX(8px);
+}
+
+.value-card__number {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(0, 212, 255, 0.1);
+    line-height: 1;
+}
+
+.value-card__title {
+    font-size: 1.125rem;
+    margin-bottom: 8px;
+    color: var(--color-accent-primary);
+}
+
+.value-card__text {
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+}
+
+[data-theme="light"] .value-card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================
+   ANIMATION STATES (for GSAP)
+   ============================================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-60px);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(60px);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.split-text .char {
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+/* ============================================
+   COMPONENTS RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+    .service-card--featured {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-card {
+        padding: 30px;
+    }
+
+    .value-card {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-card {
+        padding: 24px;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
