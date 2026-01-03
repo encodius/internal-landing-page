@@ -7,51 +7,51 @@
 // PAGE LOADER / INITIAL ANIMATIONS
 // ============================================
 function initLoader() {
-    // Set initial states
+    // Set initial states - hero__description NOT hidden to preserve LCP
     gsap.set('.hero__badge', { opacity: 0, y: 30 });
     gsap.set('.hero__title .title-line', { opacity: 0, y: 80, rotateX: -40 });
-    gsap.set('.hero__description', { opacity: 0, y: 40 });
+    // Don't hide hero__description - it's the LCP element
     gsap.set('.hero__actions', { opacity: 0, y: 30 });
     gsap.set('.code-window', { opacity: 0, scale: 0.9, rotateY: -15 });
     gsap.set('.hero__scroll', { opacity: 0 });
     gsap.set('.nav', { opacity: 0, y: -20 });
     gsap.set('.floating-shape', { opacity: 0, scale: 0 });
 
-    // Main entrance timeline
-    const tl = gsap.timeline({ delay: 0.3 });
+    // Main entrance timeline - reduced delay for faster paint
+    const tl = gsap.timeline({ delay: 0.1 });
 
     tl.to('.nav', {
         opacity: 1,
         y: 0,
-        duration: 0.8,
+        duration: 0.6,
         ease: 'power3.out'
     })
     .to('.hero__badge', {
         opacity: 1,
         y: 0,
-        duration: 0.6,
+        duration: 0.5,
         ease: 'power3.out'
-    }, '-=0.4')
+    }, '-=0.3')
     .to('.hero__title .title-line', {
         opacity: 1,
         y: 0,
         rotateX: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power3.out'
-    }, '-=0.3')
-    .to('.hero__description', {
-        opacity: 1,
-        y: 0,
         duration: 0.6,
+        stagger: 0.1,
         ease: 'power3.out'
-    }, '-=0.4')
+    }, '-=0.2')
+    // Subtle animation for hero__description since it's already visible
+    .from('.hero__description', {
+        y: 15,
+        duration: 0.4,
+        ease: 'power2.out'
+    }, '-=0.3')
     .to('.hero__actions', {
         opacity: 1,
         y: 0,
-        duration: 0.6,
+        duration: 0.5,
         ease: 'power3.out'
-    }, '-=0.3')
+    }, '-=0.2')
     .to('.code-window', {
         opacity: 1,
         scale: 1,

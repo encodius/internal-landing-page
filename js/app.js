@@ -31,22 +31,29 @@ gsap.registerPlugin(ScrollTrigger);
 // INITIALIZATION
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Core features
-    initLanguage();
-    initTheme();
-    initNavigation();
-    initContactForm();
-    initFooter();
-    initSmoothScroll();
+    // Use requestAnimationFrame to avoid blocking initial paint
+    requestAnimationFrame(() => {
+        // Core features - non-visual first
+        initFooter();
+        initSmoothScroll();
+        initNavigation();
+        initContactForm();
 
-    // Animations (from animations.js)
-    initLoader();
-    initHeroAnimations();
-    initScrollAnimations();
-    initCodeWindowAnimation();
+        // Language and theme after a frame to avoid reflow
+        requestAnimationFrame(() => {
+            initLanguage();
+            initTheme();
 
-    // Interactions (from interactions.js)
-    initInteractions();
+            // Animations (from animations.js)
+            initLoader();
+            initHeroAnimations();
+            initScrollAnimations();
+            initCodeWindowAnimation();
+
+            // Interactions (from interactions.js)
+            initInteractions();
+        });
+    });
 });
 
 // ============================================
@@ -107,41 +114,52 @@ function applyTranslations(lang, animate = false) {
     const elements = document.querySelectorAll('[data-i18n]');
     const placeholders = document.querySelectorAll('[data-i18n-placeholder]');
 
+    // Batch all reads first to avoid forced reflow
+    const elementData = [];
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
         const translation = window.translations?.[lang]?.[key];
-
         if (translation) {
-            if (animate) {
-                gsap.to(el, {
-                    opacity: 0,
-                    y: -5,
-                    duration: 0.15,
-                    ease: 'power2.in',
-                    onComplete: () => {
-                        el.textContent = translation;
-                        gsap.to(el, {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.15,
-                            ease: 'power2.out'
-                        });
-                    }
-                });
-            } else {
-                el.textContent = translation;
-            }
+            elementData.push({ el, translation });
         }
     });
 
-    // Handle placeholders
+    const placeholderData = [];
     placeholders.forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
         const translation = window.translations?.[lang]?.[key];
-
         if (translation) {
-            el.setAttribute('placeholder', translation);
+            placeholderData.push({ el, translation });
         }
+    });
+
+    // Now perform all writes
+    if (animate) {
+        elementData.forEach(({ el, translation }) => {
+            gsap.to(el, {
+                opacity: 0,
+                y: -5,
+                duration: 0.15,
+                ease: 'power2.in',
+                onComplete: () => {
+                    el.textContent = translation;
+                    gsap.to(el, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.15,
+                        ease: 'power2.out'
+                    });
+                }
+            });
+        });
+    } else {
+        elementData.forEach(({ el, translation }) => {
+            el.textContent = translation;
+        });
+    }
+
+    placeholderData.forEach(({ el, translation }) => {
+        el.setAttribute('placeholder', translation);
     });
 
     // Update page title
