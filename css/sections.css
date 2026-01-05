@@ -151,24 +151,6 @@
     max-width: 600px;
 }
 
-/* Initial hidden states for GSAP animations - prevents flash of unstyled content */
-.hero__badge,
-.hero__title .title-line,
-.hero__description,
-.hero__actions,
-.hero__scroll,
-.floating-shape {
-    opacity: 0;
-}
-
-.code-window {
-    opacity: 0;
-}
-
-.nav {
-    opacity: 0;
-}
-
 .hero__badge {
     display: inline-flex;
     align-items: center;
