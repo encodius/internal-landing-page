@@ -4,6 +4,20 @@
    ============================================ */
 
 /* ============================================
+   HERO OVERLAY - prevents flash before animations
+   ============================================ */
+.hero-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--color-bg-primary);
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* ============================================
    HERO SECTION
    ============================================ */
 .hero {

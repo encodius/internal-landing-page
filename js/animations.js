@@ -17,6 +17,17 @@ function initLoader() {
     gsap.set('.nav', { opacity: 0, y: -20 });
     gsap.set('.floating-shape', { opacity: 0, scale: 0 });
 
+    // Fade out the hero overlay
+    const overlay = document.getElementById('hero-overlay');
+    if (overlay) {
+        gsap.to(overlay, {
+            opacity: 0,
+            duration: 0.3,
+            ease: 'power2.out',
+            onComplete: () => overlay.remove()
+        });
+    }
+
     // Main entrance timeline
     const tl = gsap.timeline({ delay: 0.3 });
 
