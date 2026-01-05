@@ -4,6 +4,21 @@
    ============================================ */
 
 /* ============================================
+   INITIAL LOADING STATE
+   Prevents flash of content before GSAP animations
+   ============================================ */
+.js-loading .nav,
+.js-loading .hero__badge,
+.js-loading .hero__title .title-line,
+.js-loading .hero__description,
+.js-loading .hero__actions,
+.js-loading .hero__scroll,
+.js-loading .code-window,
+.js-loading .floating-shape {
+    visibility: hidden;
+}
+
+/* ============================================
    HERO SECTION
    ============================================ */
 .hero {
