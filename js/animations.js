@@ -7,18 +7,15 @@
 // PAGE LOADER / INITIAL ANIMATIONS
 // ============================================
 function initLoader() {
-    // Set initial states (including visibility to override CSS hidden state)
-    gsap.set('.hero__badge', { opacity: 0, y: 30, visibility: 'visible' });
-    gsap.set('.hero__title .title-line', { opacity: 0, y: 80, rotateX: -40, visibility: 'visible' });
-    gsap.set('.hero__description', { opacity: 0, y: 40, visibility: 'visible' });
-    gsap.set('.hero__actions', { opacity: 0, y: 30, visibility: 'visible' });
-    gsap.set('.code-window', { opacity: 0, scale: 0.9, rotateY: -15, visibility: 'visible' });
-    gsap.set('.hero__scroll', { opacity: 0, visibility: 'visible' });
-    gsap.set('.nav', { opacity: 0, y: -20, visibility: 'visible' });
-    gsap.set('.floating-shape', { opacity: 0, scale: 0, visibility: 'visible' });
-
-    // Remove loading class - GSAP is now in control
-    document.documentElement.classList.remove('js-loading');
+    // Set initial states
+    gsap.set('.hero__badge', { opacity: 0, y: 30 });
+    gsap.set('.hero__title .title-line', { opacity: 0, y: 80, rotateX: -40 });
+    gsap.set('.hero__description', { opacity: 0, y: 40 });
+    gsap.set('.hero__actions', { opacity: 0, y: 30 });
+    gsap.set('.code-window', { opacity: 0, scale: 0.9, rotateY: -15 });
+    gsap.set('.hero__scroll', { opacity: 0 });
+    gsap.set('.nav', { opacity: 0, y: -20 });
+    gsap.set('.floating-shape', { opacity: 0, scale: 0 });
 
     // Main entrance timeline
     const tl = gsap.timeline({ delay: 0.3 });
