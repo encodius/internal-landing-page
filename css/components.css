@@ -117,7 +117,7 @@
 }
 
 .form-input--textarea {
-    resize: vertical;
+    resize: none;
     min-height: 120px;
 }
 
