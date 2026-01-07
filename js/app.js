@@ -444,7 +444,7 @@ function initSmoothScroll() {
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                const headerOffset = 80;
+                const headerOffset = 70;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 

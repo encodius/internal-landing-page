@@ -66,11 +66,12 @@
 }
 
 [data-theme="light"] .btn--primary {
+    background: #3b82f6;
     color: #ffffff;
 }
 
 [data-theme="light"] .btn--primary:hover {
-    box-shadow: 0 10px 40px rgba(8, 145, 178, 0.3);
+    box-shadow: 0 10px 40px rgba(59, 130, 246, 0.4);
 }
 
 /* ============================================
@@ -143,7 +144,13 @@
 }
 
 [data-theme="light"] .form-input {
-    background: var(--color-bg-tertiary);
+    background: #ffffff;
+    border-color: rgba(30, 58, 95, 0.2);
+}
+
+[data-theme="light"] .form-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 /* ============================================
@@ -235,23 +242,44 @@
 }
 
 [data-theme="light"] .service-card {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+    border: none;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .service-card::before {
+    background: #3b82f6;
+    height: 3px;
 }
 
 [data-theme="light"] .service-card:hover {
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 [data-theme="light"] .service-card--featured {
-    background: linear-gradient(135deg, rgba(8, 145, 178, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
+    background: #ffffff;
+    border: none;
 }
 
 [data-theme="light"] .service-card__icon {
-    background: rgba(8, 145, 178, 0.1);
+    background: #3b82f6;
+}
+
+[data-theme="light"] .service-card__icon svg {
+    stroke: #ffffff;
+}
+
+[data-theme="light"] .service-card__title {
+    color: #3b82f6;
+}
+
+[data-theme="light"] .service-card__description {
+    color: #475569;
 }
 
 [data-theme="light"] .service-card__features li {
-    background: rgba(8, 145, 178, 0.1);
+    background: #3b82f6;
+    color: #ffffff;
 }
 
 /* ============================================
@@ -299,7 +327,17 @@
 }
 
 [data-theme="light"] .value-card {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+    border-color: rgba(30, 58, 95, 0.1);
+    box-shadow: 0 4px 20px rgba(30, 58, 95, 0.08);
+}
+
+[data-theme="light"] .value-card__number {
+    color: rgba(59, 130, 246, 0.15);
+}
+
+[data-theme="light"] .value-card__title {
+    color: #3b82f6;
 }
 
 /* ============================================

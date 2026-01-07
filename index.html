@@ -149,14 +149,6 @@
             <div class="hero__glow hero__glow--2"></div>
         </div>
 
-        <div class="hero__shapes">
-            <div class="floating-shape shape-1"></div>
-            <div class="floating-shape shape-2"></div>
-            <div class="floating-shape shape-3"></div>
-            <div class="floating-shape shape-4"></div>
-            <div class="floating-shape shape-5"></div>
-        </div>
-
         <div class="container hero__container">
             <div class="hero__content">
                 <div class="hero__badge">
@@ -205,16 +197,36 @@
   }
 };</code></pre>
                     </div>
+                    <div class="hero__logo-lines">
+                        <svg class="logo-lines-svg" viewBox="0 0 200 100" fill="none">
+                            <defs>
+                                <linearGradient id="logo-gradient" x1="0" y1="50" x2="200" y2="50" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="var(--color-accent-primary)"/>
+                                    <stop offset="100%" stop-color="var(--color-accent-secondary)"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Left bracket < : 2 lines -->
+                            <line class="logo-line logo-line--1" x1="70" y1="50" x2="83" y2="35" stroke="url(#logo-gradient)" stroke-width="6" stroke-linecap="round"/>
+                            <line class="logo-line logo-line--2" x1="70" y1="50" x2="83" y2="65" stroke="url(#logo-gradient)" stroke-width="6" stroke-linecap="round"/>
+                            <!-- Middle 3 lines -->
+                            <line class="logo-line logo-line--3" x1="90" y1="42" x2="110" y2="42" stroke="url(#logo-gradient)" stroke-width="3" stroke-linecap="round"/>
+                            <line class="logo-line logo-line--4" x1="90" y1="50" x2="110" y2="50" stroke="url(#logo-gradient)" stroke-width="3" stroke-linecap="round"/>
+                            <line class="logo-line logo-line--5" x1="90" y1="58" x2="110" y2="58" stroke="url(#logo-gradient)" stroke-width="3" stroke-linecap="round"/>
+                            <!-- Right bracket > : 2 lines -->
+                            <line class="logo-line logo-line--6" x1="130" y1="50" x2="117" y2="35" stroke="url(#logo-gradient)" stroke-width="6" stroke-linecap="round"/>
+                            <line class="logo-line logo-line--7" x1="130" y1="50" x2="117" y2="65" stroke="url(#logo-gradient)" stroke-width="6" stroke-linecap="round"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="hero__scroll">
+        <a href="#services" class="hero__scroll">
             <span data-i18n="hero.scroll">Scroll to explore</span>
             <div class="scroll-indicator">
                 <div class="scroll-indicator__dot"></div>
             </div>
-        </div>
+        </a>
     </section>
 
     <!-- Services Section -->
@@ -468,9 +480,6 @@
         <div class="container">
             <div class="footer__grid">
                 <div class="footer__brand">
-                    <a href="#hero" class="footer__logo">
-                        <img src="assets/icons/logo.svg" alt="Encodius" class="logo-img" height="25">
-                    </a>
                     <p class="footer__tagline" data-i18n="footer.tagline">Engineering the future of financial technology.</p>
                 </div>
 

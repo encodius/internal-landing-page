@@ -15,7 +15,6 @@ function initLoader() {
     gsap.set('.code-window', { opacity: 0, scale: 0.9, rotateY: -15 });
     gsap.set('.hero__scroll', { opacity: 0 });
     gsap.set('.nav', { opacity: 0, y: -20 });
-    gsap.set('.floating-shape', { opacity: 0, scale: 0 });
 
     // Fade out the hero overlay
     const overlay = document.getElementById('hero-overlay');
@@ -70,16 +69,6 @@ function initLoader() {
         duration: 1,
         ease: 'power3.out'
     }, '-=0.6')
-    .to('.floating-shape', {
-        opacity: 0.6,
-        scale: 1,
-        duration: 0.8,
-        stagger: {
-            each: 0.1,
-            from: 'random'
-        },
-        ease: 'back.out(1.7)'
-    }, '-=0.8')
     .to('.hero__scroll', {
         opacity: 1,
         duration: 0.6,
@@ -157,6 +146,104 @@ function initHeroAnimations() {
         ease: 'sine.inOut',
         delay: 1
     });
+
+    // Initialize logo lines animation
+    initLogoLinesAnimation();
+}
+
+// ============================================
+// LOGO LINES ANIMATION
+// ============================================
+function initLogoLinesAnimation() {
+    const lines = document.querySelectorAll('.logo-line');
+    if (!lines.length) return;
+
+    // Respect reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Generate random scattered position for a line
+    function getRandomScatter() {
+        // Ensure minimum distance by using separate x and y with guaranteed minimums
+        const minDistance = 300;
+        const maxExtra = 250;
+
+        // Random sign for direction
+        const xSign = Math.random() > 0.5 ? 1 : -1;
+        const ySign = Math.random() > 0.5 ? 1 : -1;
+
+        // At least one axis must have significant distance
+        const primaryAxis = Math.random() > 0.5 ? 'x' : 'y';
+
+        let x, y;
+        if (primaryAxis === 'x') {
+            x = xSign * (minDistance + Math.random() * maxExtra);
+            y = ySign * (Math.random() * (minDistance + maxExtra));
+        } else {
+            x = xSign * (Math.random() * (minDistance + maxExtra));
+            y = ySign * (minDistance + Math.random() * maxExtra);
+        }
+
+        return {
+            x: x,
+            y: y,
+            rotation: (Math.random() - 0.5) * 540 // -270 to 270 degrees
+        };
+    }
+
+    // Set initial scattered positions
+    lines.forEach(line => {
+        const scatter = getRandomScatter();
+        gsap.set(line, {
+            x: scatter.x,
+            y: scatter.y,
+            rotation: scatter.rotation
+        });
+    });
+
+    // Animation cycle function
+    function animateCycle() {
+        // Generate scatter targets for this cycle
+        const scatterTargets = [];
+        lines.forEach(() => {
+            scatterTargets.push(getRandomScatter());
+        });
+
+        const tl = gsap.timeline({
+            onComplete: animateCycle
+        });
+
+        // Assemble: all lines come together (16 seconds)
+        tl.to(lines, {
+            x: 0,
+            y: 0,
+            rotation: 0,
+            duration: 16,
+            ease: 'power2.inOut',
+            stagger: {
+                each: 0.1,
+                from: 'random'
+            }
+        });
+
+        // Hold assembled state (8 seconds)
+        tl.to({}, { duration: 8 });
+
+        // Scatter to new random positions (16 seconds)
+        const scatterStartTime = tl.duration(); // Get current timeline position
+        lines.forEach((line, index) => {
+            tl.to(line, {
+                x: scatterTargets[index].x,
+                y: scatterTargets[index].y,
+                rotation: scatterTargets[index].rotation,
+                duration: 16,
+                ease: 'power2.inOut'
+            }, scatterStartTime);
+        });
+    }
+
+    // Start the animation cycle
+    animateCycle();
 }
 
 // ============================================
