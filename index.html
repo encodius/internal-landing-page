@@ -31,8 +31,9 @@
     <meta name="twitter:image" content="https://encodius.com/assets/images/og-image.png">
 
     <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/favicon.png">
     <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
-    <link rel="apple-touch-icon" href="assets/icons/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/favicon.png">
 
     <!-- Fonts - loaded asynchronously to prevent render blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,14 +55,18 @@
         "@type": "Organization",
         "name": "Encodius",
         "url": "https://encodius.com",
+        "logo": "https://encodius.com/assets/icons/favicon.png",
         "description": "Expert software engineering for fintech, banking, web, and mobile solutions.",
         "foundingDate": "2025",
         "serviceType": ["Fintech Solutions", "Web Development", "Mobile Apps", "System Integration"],
         "areaServed": "Worldwide",
+        "sameAs": [
+            "https://github.com/encodius"
+        ],
         "contactPoint": {
             "@type": "ContactPoint",
             "contactType": "sales",
-            "email": "hello@encodius.com"
+            "email": "encodius@gmail.com"
         }
     }
     </script>
@@ -74,7 +79,7 @@
     <header class="header" id="header">
         <nav class="nav container">
             <a href="#hero" class="nav__logo">
-                <span class="logo-text">Encodius</span>
+                <img src="assets/logo.svg" alt="Encodius" class="logo-img" height="25">
             </a>
             <ul class="nav__menu">
                 <li class="nav__item">
@@ -455,7 +460,7 @@
             <div class="footer__grid">
                 <div class="footer__brand">
                     <a href="#hero" class="footer__logo">
-                        <span class="logo-text">Encodius</span>
+                        <img src="assets/logo.svg" alt="Encodius" class="logo-img" height="25">
                     </a>
                     <p class="footer__tagline" data-i18n="footer.tagline">Engineering the future of financial technology.</p>
                 </div>

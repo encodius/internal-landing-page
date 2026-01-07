@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="105 218 340 60">
+  <defs>
+    <linearGradient id="textGrad" x1="100" y1="0" x2="420" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <g>
+    <!-- "enc" -->
+    <text x="108" y="270"
+          font-family="'Space Grotesk', 'SF Pro Display', -apple-system, sans-serif"
+          font-size="68"
+          font-weight="600"
+          letter-spacing="2"
+          fill="url(#textGrad)">enc</text>
+
+    <!-- <> brackets with wide angles -->
+    <g fill="url(#textGrad)">
+      <!-- < bracket: point on left -->
+      <path d="M232 252 L248 232 L255 232 L241 252 L255 271 L248 271 Z"/>
+      <!-- three horizontal lines like hamburger -->
+      <rect x="250" y="245" width="18" height="1.5"/>
+      <rect x="250" y="251.5" width="18" height="1.5"/>
+      <rect x="250" y="258" width="18" height="1.5"/>
+      <!-- > bracket: point on right -->
+      <path d="M286 252 L270 232 L263 232 L277 252 L263 271 L270 271 Z"/>
+    </g>
+
+    <!-- "dius" -->
+    <text x="290" y="270"
+          font-family="'Space Grotesk', 'SF Pro Display', -apple-system, sans-serif"
+          font-size="68"
+          font-weight="600"
+          letter-spacing="2"
+          fill="url(#textGrad)">dius</text>
+  </g>
+</svg>

@@ -1,13 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 156">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
     <linearGradient id="symbolGrad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#00d4ff"/>
       <stop offset="100%" stop-color="#8b5cf6"/>
     </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feFlood flood-color="#6366f1" flood-opacity="0.35"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
 
-  <!-- Symbol scaled and positioned -->
-  <g transform="scale(4) translate(-232, -232)">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#0a0f1c"/>
+
+  <!-- Symbol scaled and centered -->
+  <g filter="url(#glow)" transform="translate(256, 256) scale(4) translate(-259, -252)">
     <g fill="url(#symbolGrad)">
       <!-- < bracket: point on left -->
       <path d="M232 252 L248 232 L255 232 L241 252 L255 271 L248 271 Z"/>

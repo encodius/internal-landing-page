@@ -32,6 +32,8 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    transform: scale(1);
+    will-change: transform;
     transition: transform var(--transition-base);
 }
 
@@ -48,11 +50,6 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     transition: filter var(--transition-base), text-shadow var(--transition-base);
-}
-
-.nav__logo:hover .logo-text {
-    filter: brightness(1.2);
-    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(139, 92, 246, 0.3);
 }
 
 .nav__menu {
@@ -320,6 +317,8 @@
 .footer__logo {
     display: inline-block;
     margin-bottom: 16px;
+    transform: scale(1);
+    will-change: transform;
     transition: transform var(--transition-base);
 }
 
