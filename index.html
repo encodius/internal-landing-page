@@ -93,9 +93,18 @@
                 </li>
             </ul>
             <div class="nav__controls">
-                <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
-                    <span class="lang-toggle__text">EN</span>
-                </button>
+                <div class="lang-dropdown" id="lang-dropdown">
+                    <button class="lang-toggle" id="lang-toggle" aria-label="Select language" aria-expanded="false" aria-haspopup="listbox">
+                        <span class="lang-toggle__text">EN</span>
+                        <svg class="lang-toggle__arrow" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M1 1l4 4 4-4"/>
+                        </svg>
+                    </button>
+                    <ul class="lang-dropdown__menu" id="lang-menu" role="listbox" aria-label="Language selection">
+                        <li class="lang-dropdown__item" data-lang="en" role="option">EN</li>
+                        <li class="lang-dropdown__item" data-lang="sr" role="option">SR</li>
+                    </ul>
+                </div>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>

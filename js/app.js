@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 (function initThemeEarly() {
     const savedTheme = localStorage.getItem('encodius-theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = savedTheme || (prefersDark ? 'dark' : 'dark'); // Default to dark
+    const theme = savedTheme || (prefersDark ? 'dark' : 'light'); // Default to light
 
     if (theme === 'light') {
         document.documentElement.setAttribute('data-theme', 'light');
@@ -57,57 +57,112 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================
-// LANGUAGE TOGGLE
+// LANGUAGE DROPDOWN
 // ============================================
 function initLanguage() {
+    const langDropdown = document.getElementById('lang-dropdown');
     const langToggle = document.getElementById('lang-toggle');
+    const langMenu = document.getElementById('lang-menu');
     const langText = langToggle?.querySelector('.lang-toggle__text');
-    if (!langToggle || !langText) return;
+    const langItems = langMenu?.querySelectorAll('.lang-dropdown__item');
+
+    if (!langDropdown || !langToggle || !langMenu || !langText || !langItems) return;
 
     // Get current language
     let currentLang = localStorage.getItem('encodius-lang') || 'en';
 
-    // Update button text
+    // Update button text and mark active item
     langText.textContent = currentLang.toUpperCase();
+    updateActiveItem(currentLang);
 
     // Apply translations on load
     applyTranslations(currentLang);
 
-    langToggle.addEventListener('click', () => {
-        // Toggle language
-        currentLang = currentLang === 'en' ? 'sr' : 'en';
+    // Toggle dropdown on button click
+    langToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = langDropdown.classList.contains('open');
 
-        // Save preference
-        localStorage.setItem('encodius-lang', currentLang);
-        document.documentElement.setAttribute('lang', currentLang);
+        if (isOpen) {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    });
 
-        // Animate button
-        gsap.to(langToggle, {
-            scale: 0.9,
-            duration: 0.1,
-            yoyo: true,
-            repeat: 1,
-            ease: 'power2.inOut'
+    // Handle language selection
+    langItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const newLang = item.getAttribute('data-lang');
+
+            if (newLang !== currentLang) {
+                currentLang = newLang;
+
+                // Save preference
+                localStorage.setItem('encodius-lang', currentLang);
+                document.documentElement.setAttribute('lang', currentLang);
+
+                // Update UI
+                updateActiveItem(currentLang);
+
+                // Animate text change
+                gsap.to(langText, {
+                    opacity: 0,
+                    y: -10,
+                    duration: 0.15,
+                    ease: 'power2.in',
+                    onComplete: () => {
+                        langText.textContent = currentLang.toUpperCase();
+                        gsap.fromTo(langText,
+                            { opacity: 0, y: 10 },
+                            { opacity: 1, y: 0, duration: 0.15, ease: 'power2.out' }
+                        );
+                    }
+                });
+
+                // Apply translations with animation
+                applyTranslations(currentLang, true);
+            }
+
+            closeDropdown();
         });
+    });
 
-        // Animate text change
-        gsap.to(langText, {
-            opacity: 0,
-            y: -10,
-            duration: 0.15,
-            ease: 'power2.in',
-            onComplete: () => {
-                langText.textContent = currentLang.toUpperCase();
-                gsap.fromTo(langText,
-                    { opacity: 0, y: 10 },
-                    { opacity: 1, y: 0, duration: 0.15, ease: 'power2.out' }
-                );
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!langDropdown.contains(e.target)) {
+            closeDropdown();
+        }
+    });
+
+    // Close dropdown on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeDropdown();
+        }
+    });
+
+    function openDropdown() {
+        langDropdown.classList.add('open');
+        langToggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeDropdown() {
+        langDropdown.classList.remove('open');
+        langToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    function updateActiveItem(lang) {
+        langItems.forEach(item => {
+            if (item.getAttribute('data-lang') === lang) {
+                item.classList.add('active');
+                item.setAttribute('aria-selected', 'true');
+            } else {
+                item.classList.remove('active');
+                item.setAttribute('aria-selected', 'false');
             }
         });
-
-        // Apply translations with animation
-        applyTranslations(currentLang, true);
-    });
+    }
 }
 
 function applyTranslations(lang, animate = false) {
