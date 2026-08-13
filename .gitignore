@@ -19,3 +19,8 @@ build/
 # Environment
 .env
 .env.local
+
+# Design source import (raw Claude design canvas export, not site files)
+_redesign_import/
+*.dc.html
+Encodius landing page redesign.zip

@@ -1,157 +1,86 @@
 /* ============================================
    ENCODIUS - Interactions
-   Hover Effects, Magnetic Buttons, Scroll Progress
+   Mobile nav, header scroll state, product tabs
    ============================================ */
 
-// ============================================
-// BUTTON HOVER EFFECTS
-// ============================================
-function initButtonHovers() {
-    document.querySelectorAll('.btn').forEach(btn => {
-        btn.addEventListener('mouseenter', () => {
-            gsap.to(btn, {
-                scale: 1.05,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-        });
+function initHeaderScrollState() {
+    const header = document.getElementById('header');
+    if (!header) return;
 
-        btn.addEventListener('mouseleave', () => {
-            gsap.to(btn, {
-                scale: 1,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-        });
+    const onScroll = () => {
+        header.classList.toggle('scrolled', window.scrollY > 24);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+}
+
+function initMobileNav() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navMobile = document.getElementById('nav-mobile');
+    const navMobileClose = document.getElementById('nav-mobile-close');
+    const navBackdrop = document.getElementById('nav-backdrop');
+
+    if (!navMobile) return;
+
+    const navMobileLinks = navMobile.querySelectorAll('a');
+
+    function closeMenu() {
+        navMobile.classList.remove('active');
+        navBackdrop?.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function openMenu() {
+        navMobile.classList.add('active');
+        navBackdrop?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    navToggle?.addEventListener('click', openMenu);
+    navMobileClose?.addEventListener('click', closeMenu);
+    navBackdrop?.addEventListener('click', closeMenu);
+    navMobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
     });
 }
 
-// ============================================
-// SERVICE CARD HOVER EFFECTS
-// ============================================
-function initServiceCardHovers() {
-    document.querySelectorAll('.service-card').forEach(card => {
-        const icon = card.querySelector('.service-card__icon');
+/* ============================================
+   PRODUCT SCREENSHOT TABS (Correlis page)
+   ============================================ */
+function initShotTabs() {
+    const tabs = document.querySelectorAll('[data-shot-tab]');
+    const image = document.querySelector('[data-shot-image]');
+    const caption = document.getElementById('shot-caption');
+    if (!tabs.length || !image) return;
 
-        if (!icon) return;
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            if (tab.classList.contains('active')) return;
 
-        card.addEventListener('mouseenter', () => {
-            gsap.to(icon, {
-                scale: 1.1,
-                rotate: 5,
-                duration: 0.4,
-                ease: 'power2.out'
-            });
-        });
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
 
-        card.addEventListener('mouseleave', () => {
-            gsap.to(icon, {
-                scale: 1,
-                rotate: 0,
-                duration: 0.4,
-                ease: 'power2.out'
-            });
-        });
-    });
-}
+            const src = tab.getAttribute('data-shot-src');
+            const alt = tab.getAttribute('data-shot-alt') || '';
+            const key = tab.getAttribute('data-shot-key');
 
-// ============================================
-// VALUE CARD HOVER EFFECTS
-// ============================================
-function initValueCardHovers() {
-    document.querySelectorAll('.value-card').forEach(card => {
-        const number = card.querySelector('.value-card__number');
-
-        if (!number) return;
-
-        card.addEventListener('mouseenter', () => {
-            gsap.to(number, {
-                scale: 1.2,
-                opacity: 0.2,
-                duration: 0.4,
-                ease: 'power2.out'
-            });
-        });
-
-        card.addEventListener('mouseleave', () => {
-            gsap.to(number, {
-                scale: 1,
-                opacity: 0.1,
-                duration: 0.4,
-                ease: 'power2.out'
-            });
+            image.style.transition = 'opacity 0.32s ease';
+            image.style.opacity = '0';
+            setTimeout(() => {
+                image.src = src;
+                image.alt = alt;
+                if (caption && key) {
+                    caption.setAttribute('data-i18n', key);
+                    const lang = localStorage.getItem('encodius-lang') || 'en';
+                    const translation = window.translations?.[lang]?.[key];
+                    if (translation) caption.textContent = translation;
+                }
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    image.style.opacity = '1';
+                }));
+            }, 160);
         });
     });
 }
-
-// ============================================
-// MAGNETIC EFFECT ON CTA BUTTONS
-// ============================================
-function initMagneticButtons() {
-    document.querySelectorAll('.btn--primary').forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-
-            gsap.to(btn, {
-                x: x * 0.2,
-                y: y * 0.2,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-        });
-
-        btn.addEventListener('mouseleave', () => {
-            gsap.to(btn, {
-                x: 0,
-                y: 0,
-                duration: 0.5,
-                ease: 'elastic.out(1, 0.5)'
-            });
-        });
-    });
-}
-
-// ============================================
-// SCROLL PROGRESS INDICATOR
-// ============================================
-function initScrollProgress() {
-    const progressBar = document.createElement('div');
-    progressBar.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 2px;
-        background: linear-gradient(90deg, #00d4ff, #8b5cf6);
-        z-index: 9999;
-        transform-origin: left;
-        transform: scaleX(0);
-    `;
-    document.body.appendChild(progressBar);
-
-    window.addEventListener('scroll', () => {
-        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollProgress = window.pageYOffset / scrollHeight;
-        progressBar.style.transform = `scaleX(${scrollProgress})`;
-    });
-}
-
-// ============================================
-// INITIALIZE ALL INTERACTIONS
-// ============================================
-function initInteractions() {
-    initButtonHovers();
-    initServiceCardHovers();
-    initValueCardHovers();
-    initMagneticButtons();
-    initScrollProgress();
-}
-
-// Expose functions globally
-window.initInteractions = initInteractions;
-window.initButtonHovers = initButtonHovers;
-window.initServiceCardHovers = initServiceCardHovers;
-window.initValueCardHovers = initValueCardHovers;
-window.initMagneticButtons = initMagneticButtons;
-window.initScrollProgress = initScrollProgress;

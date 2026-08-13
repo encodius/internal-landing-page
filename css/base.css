@@ -3,72 +3,50 @@
    Variables, Reset, Typography, Utilities
    ============================================ */
 
-/* CSS Variables */
 :root {
-    /* Colors */
-    --color-bg-primary: #0a0f1c;
-    --color-bg-secondary: #111827;
-    --color-bg-tertiary: #1a2234;
-    --color-bg-card: rgba(26, 34, 52, 0.6);
-    --color-bg-card-hover: rgba(26, 34, 52, 0.9);
+    /* Colors — light editorial palette */
+    --bg: #FAFAF9;
+    --bg-inset: #F1F1EE;
+    --surface: #FFFFFF;
 
-    --color-accent-primary: #00d4ff;
-    --color-accent-secondary: #8b5cf6;
-    --color-accent-tertiary: #06b6d4;
+    --ink: #0C1017;
+    --ink-secondary: #4A4F57;
+    --ink-nav: #3D424A;
+    --ink-muted: #6A6F77;
+    --ink-faint: #9A9EA4;
 
-    --color-text-primary: #ffffff;
-    --color-text-secondary: #94a3b8;
-    --color-text-muted: #64748b;
+    --border: #E1E1DC;
+    --border-strong: #D6D6D0;
+    --border-cta: #CFCFC9;
 
-    --color-border: rgba(148, 163, 184, 0.1);
-    --color-border-hover: rgba(0, 212, 255, 0.3);
+    --accent: #2B4FD1;
+    --accent-hover: #1A36A0;
+    --accent-bg: rgba(43, 79, 209, 0.08);
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, var(--color-accent-primary) 0%, var(--color-accent-secondary) 100%);
-    --gradient-glow: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
-    --gradient-card: linear-gradient(180deg, rgba(26, 34, 52, 0.8) 0%, rgba(26, 34, 52, 0.4) 100%);
+    --dark-bg: #0C1017;
+    --dark-bg-raised: #14191F;
+    --dark-ink: #F2F2EF;
+    --dark-ink-secondary: #A7ADB6;
+    --dark-ink-muted: #8E959F;
+    --dark-ink-faint: #6C7480;
+    --dark-border: rgba(255, 255, 255, 0.14);
 
     /* Typography */
-    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-display: 'Space Grotesk', sans-serif;
+    --font-sans: 'Instrument Sans', Helvetica, Arial, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
 
     /* Spacing */
-    --section-padding: 120px;
+    --section-padding: 128px;
     --container-width: 1200px;
 
     /* Transitions */
     --transition-fast: 0.2s ease;
-    --transition-base: 0.3s ease;
-    --transition-slow: 0.5s ease;
+    --transition-base: 0.25s ease;
 
     /* Border Radius */
     --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
-}
-
-/* Light Theme - 3 color palette: Dark blue #1e3a5f, Light blue #3b82f6, White #ffffff */
-[data-theme="light"] {
-    --color-bg-primary: #ffffff;
-    --color-bg-secondary: #1e3a5f;
-    --color-bg-tertiary: #1e3a5f;
-    --color-bg-card: #ffffff;
-    --color-bg-card-hover: #ffffff;
-
-    --color-accent-primary: #3b82f6;
-    --color-accent-secondary: #3b82f6;
-    --color-accent-tertiary: #3b82f6;
-
-    --color-text-primary: #1e3a5f;
-    --color-text-secondary: #1e3a5f;
-    --color-text-muted: #3b82f6;
-
-    --color-border: rgba(30, 58, 95, 0.15);
-    --color-border-hover: rgba(59, 130, 246, 0.5);
-
-    --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #1e3a5f 100%);
-    --gradient-card: linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
+    --radius-md: 6px;
+    --radius-lg: 8px;
 }
 
 /* Reset & Base */
@@ -80,34 +58,31 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 70px;
+    scroll-padding-top: 96px;
 }
 
 body {
-    font-family: var(--font-primary);
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--color-text-primary);
-    background-color: var(--color-bg-primary);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink);
+    background-color: var(--bg);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.4s ease, color 0.4s ease;
+    text-wrap: pretty;
 }
 
 main {
     overflow: hidden;
 }
 
-/* Theme transition for all elements */
-*, *::before, *::after {
-    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+input, textarea, button, select {
+    font: inherit;
 }
 
-/* Selection */
 ::selection {
-    background: var(--color-accent-primary);
-    color: var(--color-bg-primary);
+    background: #DCE2FA;
 }
 
 /* Skip Link (Accessibility) */
@@ -116,8 +91,8 @@ main {
     top: -100%;
     left: 16px;
     padding: 12px 24px;
-    background: var(--gradient-primary);
-    color: var(--color-bg-primary);
+    background: var(--ink);
+    color: var(--bg);
     font-weight: 600;
     border-radius: var(--radius-md);
     z-index: 9999;
@@ -134,13 +109,13 @@ main {
 }
 
 *:focus-visible {
-    outline: 2px solid var(--color-accent-primary);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
 }
 
 a:focus-visible,
 button:focus-visible {
-    outline: 2px solid var(--color-accent-primary);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: var(--radius-sm);
 }
@@ -150,59 +125,202 @@ button:focus-visible {
     width: 100%;
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 32px;
 }
 
 /* Typography */
 h1, h2, h3, h4 {
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     font-weight: 600;
-    line-height: 1.2;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
 }
 
 a {
     text-decoration: none;
-    color: inherit;
+    color: var(--accent);
     transition: color var(--transition-fast);
 }
 
-/* Gradient Text */
-.gradient-text {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+a:hover {
+    color: var(--accent-hover);
 }
 
-/* Section Common */
-.section-tag {
-    display: inline-block;
-    font-size: 0.875rem;
-    font-weight: 500;
+/* Eyebrow / section number label */
+.eyebrow {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-accent-primary);
-    margin-bottom: 16px;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
 }
 
-.section-header {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto 80px;
+.eyebrow span:last-child {
+    color: var(--ink);
 }
 
-.section-title {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: 24px;
+section--dark .eyebrow,
+.section--dark .eyebrow {
+    border-top-color: var(--dark-border);
+    color: var(--dark-ink-faint);
 }
 
-.section-title span {
+.section--dark .eyebrow span:last-child {
+    color: var(--dark-ink);
+}
+
+.tag {
     display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
 }
 
-.section-description {
-    font-size: 1.125rem;
-    color: var(--color-text-secondary);
-    max-width: 600px;
-    margin: 0 auto;
+/* Section heading */
+.section-title {
+    font-size: clamp(30px, 3.2vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+}
+
+.section-lead {
+    color: var(--ink-secondary);
+    font-size: 17px;
+    line-height: 1.55;
+}
+
+/* Grid utilities */
+.grid {
+    display: grid;
+    gap: 32px;
+}
+
+.grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+/* Tile grid — hairline-divided panel cards */
+.tile-grid {
+    display: grid;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.tile-grid--1 { grid-template-columns: minmax(0, 1fr); }
+.tile-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tile-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tile-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.tile {
+    background: var(--bg);
+    padding: 32px 28px 36px;
+    transition: background var(--transition-base);
+}
+
+.tile:hover {
+    background: var(--surface);
+}
+
+.tile__index {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.12em;
+    margin-bottom: 18px;
+}
+
+.tile__title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.tile__text {
+    color: var(--ink-muted);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.section--dark .tile-grid {
+    background: var(--dark-border);
+    border-color: var(--dark-border);
+}
+
+.section--dark .tile {
+    background: var(--dark-bg);
+}
+
+.section--dark .tile:hover {
+    background: var(--dark-bg-raised);
+}
+
+.section--dark .tile__title {
+    color: var(--dark-ink);
+}
+
+.section--dark .tile__text {
+    color: var(--dark-ink-muted);
+}
+
+/* Reveal (scroll animation hook) — hidden only once JS confirms it can reveal it */
+html.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+html.js [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html.js [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* ============================================
+   BASE RESPONSIVE
+   ============================================ */
+@media (max-width: 1100px) {
+    .grid--4, .tile-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid--3, .tile-grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .split { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+}
+
+@media (max-width: 760px) {
+    :root {
+        --section-padding: 80px;
+    }
+    .grid--2, .grid--3, .grid--4,
+    .tile-grid--2, .tile-grid--3, .tile-grid--4 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .container {
+        padding: 0 20px;
+    }
 }

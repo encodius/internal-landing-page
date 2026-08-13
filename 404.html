@@ -8,7 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,9 +16,9 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0a0f1c;
-            color: #ffffff;
+            font-family: 'Instrument Sans', Helvetica, Arial, sans-serif;
+            background: #FAFAF9;
+            color: #0C1017;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -30,24 +30,22 @@
             max-width: 500px;
         }
         .error-code {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(6rem, 20vw, 10rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: clamp(5rem, 18vw, 8rem);
+            font-weight: 500;
+            color: #2B4FD1;
             line-height: 1;
             margin-bottom: 16px;
+            letter-spacing: -0.02em;
         }
         h1 {
-            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.5rem;
             font-weight: 600;
+            letter-spacing: -0.02em;
             margin-bottom: 16px;
         }
         p {
-            color: #94a3b8;
+            color: #6A6F77;
             margin-bottom: 32px;
             line-height: 1.6;
         }
@@ -55,18 +53,18 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 32px;
-            background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
-            color: #0a0f1c;
+            padding: 14px 26px;
+            background: #0C1017;
+            color: #FAFAF9;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 4px;
+            transition: background 0.2s;
         }
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+            background: #23272E;
+            color: #FFFFFF;
         }
         .btn svg {
             width: 20px;

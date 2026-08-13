@@ -1,23 +1,10 @@
 /* ============================================
    ENCODIUS - App Core
-   Initialization, Navigation, Theme, Language, Form
+   Initialization, Navigation, Language, Contact Form
    ============================================ */
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
-
-// ============================================
-// THEME - Initialize before DOM to prevent flash
-// ============================================
-(function initThemeEarly() {
-    const savedTheme = localStorage.getItem('encodius-theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = savedTheme || (prefersDark ? 'dark' : 'light'); // Default to light
-
-    if (theme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-    }
-})();
+// Mark JS as available so CSS can hide [data-reveal] only when it will actually be revealed
+document.documentElement.classList.add('js');
 
 // ============================================
 // LANGUAGE - Initialize before DOM to prevent flash
@@ -31,299 +18,70 @@ gsap.registerPlugin(ScrollTrigger);
 // INITIALIZATION
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Use requestAnimationFrame to avoid blocking initial paint
-    requestAnimationFrame(() => {
-        // Core features - non-visual first
-        initFooter();
-        initSmoothScroll();
-        initNavigation();
-        initContactForm();
-
-        // Language and theme after a frame to avoid reflow
-        requestAnimationFrame(() => {
-            initLanguage();
-            initTheme();
-
-            // Animations (from animations.js)
-            initLoader();
-            initHeroAnimations();
-            initScrollAnimations();
-            initCodeWindowAnimation();
-
-            // Interactions (from interactions.js)
-            initInteractions();
-        });
-    });
+    initFooter();
+    initSmoothScroll();
+    initMobileNav();
+    initHeaderScrollState();
+    initContactForm();
+    initShotTabs();
+    initLanguage();
+    initScrollReveal();
+    initStatCounters();
 });
 
 // ============================================
-// LANGUAGE DROPDOWN
+// LANGUAGE TOGGLE (EN / SR)
 // ============================================
 function initLanguage() {
-    const langDropdown = document.getElementById('lang-dropdown');
-    const langToggle = document.getElementById('lang-toggle');
-    const langMenu = document.getElementById('lang-menu');
-    const langText = langToggle?.querySelector('.lang-toggle__text');
-    const langItems = langMenu?.querySelectorAll('.lang-dropdown__item');
+    const buttons = document.querySelectorAll('[data-lang-btn]');
+    if (!buttons.length) return;
 
-    if (!langDropdown || !langToggle || !langMenu || !langText || !langItems) return;
-
-    // Get current language
     let currentLang = localStorage.getItem('encodius-lang') || 'en';
 
-    // Update button text and mark active item
-    langText.textContent = currentLang.toUpperCase();
-    updateActiveItem(currentLang);
+    function updateButtons(lang) {
+        buttons.forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === lang);
+        });
+    }
 
-    // Apply translations on load
+    updateButtons(currentLang);
     applyTranslations(currentLang);
 
-    // Toggle dropdown on button click
-    langToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isOpen = langDropdown.classList.contains('open');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const newLang = btn.getAttribute('data-lang-btn');
+            if (newLang === currentLang) return;
 
-        if (isOpen) {
-            closeDropdown();
-        } else {
-            openDropdown();
-        }
-    });
-
-    // Handle language selection
-    langItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const newLang = item.getAttribute('data-lang');
-
-            if (newLang !== currentLang) {
-                currentLang = newLang;
-
-                // Save preference
-                localStorage.setItem('encodius-lang', currentLang);
-                document.documentElement.setAttribute('lang', currentLang);
-
-                // Update UI
-                updateActiveItem(currentLang);
-
-                // Animate text change
-                gsap.to(langText, {
-                    opacity: 0,
-                    y: -10,
-                    duration: 0.15,
-                    ease: 'power2.in',
-                    onComplete: () => {
-                        langText.textContent = currentLang.toUpperCase();
-                        gsap.fromTo(langText,
-                            { opacity: 0, y: 10 },
-                            { opacity: 1, y: 0, duration: 0.15, ease: 'power2.out' }
-                        );
-                    }
-                });
-
-                // Apply translations with animation
-                applyTranslations(currentLang, true);
-            }
-
-            closeDropdown();
+            currentLang = newLang;
+            localStorage.setItem('encodius-lang', currentLang);
+            document.documentElement.setAttribute('lang', currentLang);
+            updateButtons(currentLang);
+            applyTranslations(currentLang);
         });
     });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!langDropdown.contains(e.target)) {
-            closeDropdown();
-        }
-    });
-
-    // Close dropdown on escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeDropdown();
-        }
-    });
-
-    function openDropdown() {
-        langDropdown.classList.add('open');
-        langToggle.setAttribute('aria-expanded', 'true');
-    }
-
-    function closeDropdown() {
-        langDropdown.classList.remove('open');
-        langToggle.setAttribute('aria-expanded', 'false');
-    }
-
-    function updateActiveItem(lang) {
-        langItems.forEach(item => {
-            if (item.getAttribute('data-lang') === lang) {
-                item.classList.add('active');
-                item.setAttribute('aria-selected', 'true');
-            } else {
-                item.classList.remove('active');
-                item.setAttribute('aria-selected', 'false');
-            }
-        });
-    }
 }
 
-function applyTranslations(lang, animate = false) {
+function applyTranslations(lang) {
     const elements = document.querySelectorAll('[data-i18n]');
     const placeholders = document.querySelectorAll('[data-i18n-placeholder]');
 
-    // Batch all reads first to avoid forced reflow
-    const elementData = [];
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
         const translation = window.translations?.[lang]?.[key];
-        if (translation) {
-            elementData.push({ el, translation });
-        }
+        if (translation) el.textContent = translation;
     });
 
-    const placeholderData = [];
     placeholders.forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
         const translation = window.translations?.[lang]?.[key];
-        if (translation) {
-            placeholderData.push({ el, translation });
-        }
+        if (translation) el.setAttribute('placeholder', translation);
     });
 
-    // Now perform all writes
-    if (animate) {
-        elementData.forEach(({ el, translation }) => {
-            gsap.to(el, {
-                opacity: 0,
-                y: -5,
-                duration: 0.15,
-                ease: 'power2.in',
-                onComplete: () => {
-                    el.textContent = translation;
-                    gsap.to(el, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.15,
-                        ease: 'power2.out'
-                    });
-                }
-            });
-        });
-    } else {
-        elementData.forEach(({ el, translation }) => {
-            el.textContent = translation;
-        });
+    const titleKey = document.body.getAttribute('data-i18n-title');
+    if (titleKey) {
+        const translation = window.translations?.[lang]?.[titleKey];
+        if (translation) document.title = translation;
     }
-
-    placeholderData.forEach(({ el, translation }) => {
-        el.setAttribute('placeholder', translation);
-    });
-
-    // Update page title
-    const titles = {
-        en: 'Encodius | Fintech & Software Engineering Experts',
-        sr: 'Encodius | Fintech i Softverski Inženjering Eksperti'
-    };
-    document.title = titles[lang] || titles.en;
-}
-
-// ============================================
-// THEME TOGGLE
-// ============================================
-function initTheme() {
-    const themeToggle = document.getElementById('theme-toggle');
-    if (!themeToggle) return;
-
-    themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-
-        if (isDark) {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('encodius-theme', 'light');
-        } else {
-            document.documentElement.removeAttribute('data-theme');
-            localStorage.setItem('encodius-theme', 'dark');
-        }
-
-        // Animate the toggle button
-        gsap.to(themeToggle, {
-            scale: 0.9,
-            duration: 0.1,
-            yoyo: true,
-            repeat: 1,
-            ease: 'power2.inOut'
-        });
-
-        // Animate icon rotation
-        const activeIcon = isDark ? themeToggle.querySelector('.icon-sun') : themeToggle.querySelector('.icon-moon');
-        if (activeIcon) {
-            gsap.fromTo(activeIcon,
-                { rotate: -30, scale: 0.5 },
-                { rotate: 0, scale: 1, duration: 0.3, ease: 'back.out(1.7)' }
-            );
-        }
-    });
-
-    // Listen for system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('encodius-theme')) {
-            if (e.matches) {
-                document.documentElement.removeAttribute('data-theme');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'light');
-            }
-        }
-    });
-}
-
-// ============================================
-// NAVIGATION
-// ============================================
-function initNavigation() {
-    const header = document.getElementById('header');
-    const navToggle = document.getElementById('nav-toggle');
-    const navMobile = document.getElementById('nav-mobile');
-    const navMobileClose = document.getElementById('nav-mobile-close');
-    const navBackdrop = document.getElementById('nav-backdrop');
-
-    if (!navMobile) return;
-
-    const navMobileLinks = navMobile.querySelectorAll('.nav__link');
-
-    // Scroll effect
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 50) {
-            header?.classList.add('scrolled');
-        } else {
-            header?.classList.remove('scrolled');
-        }
-    });
-
-    // Helper to close menu
-    function closeMenu() {
-        navMobile.classList.remove('active');
-        navBackdrop?.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    // Helper to open menu
-    function openMenu() {
-        navMobile.classList.add('active');
-        navBackdrop?.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    // Open menu on hamburger click
-    navToggle?.addEventListener('click', openMenu);
-
-    // Close menu on close button click
-    navMobileClose?.addEventListener('click', closeMenu);
-
-    // Close menu on backdrop click
-    navBackdrop?.addEventListener('click', closeMenu);
-
-    // Close menu on link click
-    navMobileLinks.forEach(link => {
-        link.addEventListener('click', closeMenu);
-    });
 }
 
 // ============================================
@@ -339,9 +97,8 @@ function initContactForm() {
         e.preventDefault();
 
         const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
+        const originalHTML = submitBtn.innerHTML;
 
-        // Loading state
         submitBtn.innerHTML = '<span>Sending...</span>';
         submitBtn.disabled = true;
 
@@ -349,75 +106,29 @@ function initContactForm() {
             const response = await fetch(form.action, {
                 method: 'POST',
                 body: new FormData(form),
-                headers: {
-                    'Accept': 'application/json'
-                }
+                headers: { 'Accept': 'application/json' }
             });
 
             const result = await response.json();
 
             if (result.success) {
-                formStatus.textContent = 'Message sent successfully! We\'ll get back to you soon.';
+                formStatus.textContent = "Message sent successfully! We'll get back to you soon.";
                 formStatus.className = 'form-status success';
                 form.reset();
-
-                // Animate success
-                gsap.from(formStatus, {
-                    opacity: 0,
-                    y: 20,
-                    duration: 0.5,
-                    ease: 'power2.out'
-                });
             } else {
                 throw new Error(result.message || 'Failed to send');
             }
         } catch (error) {
             formStatus.textContent = 'Something went wrong. Please try again or email us directly.';
             formStatus.className = 'form-status error';
-
-            gsap.from(formStatus, {
-                opacity: 0,
-                y: 20,
-                duration: 0.5,
-                ease: 'power2.out'
-            });
         }
 
-        submitBtn.innerHTML = originalText;
+        submitBtn.innerHTML = originalHTML;
         submitBtn.disabled = false;
 
-        // Hide status after 5 seconds
         setTimeout(() => {
-            gsap.to(formStatus, {
-                opacity: 0,
-                duration: 0.3,
-                onComplete: () => {
-                    formStatus.className = 'form-status';
-                    formStatus.style.opacity = '';
-                }
-            });
-        }, 5000);
-    });
-
-    // Input focus animations
-    const inputs = form.querySelectorAll('.form-input');
-
-    inputs.forEach(input => {
-        input.addEventListener('focus', () => {
-            gsap.to(input, {
-                scale: 1.02,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-        });
-
-        input.addEventListener('blur', () => {
-            gsap.to(input, {
-                scale: 1,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-        });
+            formStatus.className = 'form-status';
+        }, 6000);
     });
 }
 
@@ -425,7 +136,6 @@ function initContactForm() {
 // FOOTER
 // ============================================
 function initFooter() {
-    // Set current year
     const yearElement = document.getElementById('current-year');
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
@@ -437,22 +147,18 @@ function initFooter() {
 // ============================================
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-
+        anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
             const targetElement = document.querySelector(targetId);
+            if (!targetElement) return;
 
-            if (targetElement) {
-                const headerOffset = 70;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            e.preventDefault();
+            const headerOffset = 88;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         });
     });
 }
