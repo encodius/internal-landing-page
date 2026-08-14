@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initLanguage();
     initScrollReveal();
     initStatCounters();
+    window.ENCODIUS_FIELD?.init();
 });
 
 // ============================================
