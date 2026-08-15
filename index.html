@@ -31,9 +31,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Manrope:wght@500;700;800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet"></noscript>
 
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
@@ -77,8 +77,6 @@
                 <span class="nav__logo-text">Encodius</span>
             </a>
             <ul class="nav__menu">
-                <li><a href="correlis.html" class="nav__link" data-i18n="nav.product">Product</a></li>
-                <li><a href="services.html" class="nav__link" data-i18n="nav.services">Services</a></li>
                 <li><a href="#company" class="nav__link" data-i18n="nav.company">Company</a></li>
                 <li><a href="#contact" class="nav__link" data-i18n="nav.contact">Contact</a></li>
             </ul>
@@ -101,8 +99,6 @@
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
         </button>
         <ul class="nav__mobile-menu">
-            <li><a href="correlis.html" class="nav__link" data-i18n="nav.product">Product</a></li>
-            <li><a href="services.html" class="nav__link" data-i18n="nav.services">Services</a></li>
             <li><a href="#company" class="nav__link" data-i18n="nav.company">Company</a></li>
             <li><a href="#contact" class="nav__link" data-i18n="nav.contact">Contact</a></li>
         </ul>
@@ -120,41 +116,19 @@
 
     <!-- Hero -->
     <section class="hero page-section" id="hero">
-        <div class="split hero__split" data-reveal>
-            <div>
-                <span class="tag" data-i18n="home.hero.eyebrow">Correlis — fraud case management</span>
-                <h1 data-i18n="home.hero.title">Every fraud case, from the first alert to the filed report.</h1>
-                <p data-i18n="home.hero.desc">Correlis is case management for fraud teams at banks, insurers and gaming operators. Intake, investigation, legal deadlines, correspondence and a ten-year audit trail in one system.</p>
-                <div class="hero__actions">
-                    <a href="mailto:office@encodius.com?subject=Correlis%20demo%20request" class="btn btn--primary" data-i18n="nav.ctaDemo">Request a demo</a>
-                    <a href="correlis.html" class="btn btn--secondary" data-i18n="home.hero.ctaProduct">See the product</a>
-                </div>
-                <div class="status-line">
-                    <span class="status-dot"></span>
-                    <span data-i18n="home.hero.status">In pilot with a European bank's fraud operations team.</span>
-                </div>
+        <div class="hero__blob hero__blob--a"></div>
+        <div class="hero__blob hero__blob--b"></div>
+
+        <div class="hero__inner" data-reveal>
+            <span class="tag" data-i18n="home.hero.eyebrow">Correlis — fraud case management</span>
+            <h1><span data-i18n="home.hero.titleLead">Every fraud case, from the first alert to the </span><span class="hero__title-accent" data-i18n="home.hero.titleAccent">filed report</span><span data-i18n="home.hero.titleEnd">.</span></h1>
+            <p data-i18n="home.hero.desc">Correlis is case management for fraud teams at banks, insurers and gaming operators. Intake, investigation, legal deadlines, correspondence and a ten-year audit trail in one system.</p>
+            <div class="hero__actions">
+                <a href="mailto:office@encodius.com?subject=Correlis%20demo%20request" class="btn btn--primary" data-i18n="nav.ctaDemo">Request a demo</a>
             </div>
-            <div class="tile-grid tile-grid--1 feature-list">
-                <div class="tile">
-                    <div class="tile__index">01</div>
-                    <div class="tile__title" data-i18n="home.feat1.title">Role-based access</div>
-                    <div class="tile__text" data-i18n="home.feat1.text">Roles and permissions you define yourself, per screen and per action.</div>
-                </div>
-                <div class="tile">
-                    <div class="tile__index">02</div>
-                    <div class="tile__title" data-i18n="home.feat2.title">10-year audit retention</div>
-                    <div class="tile__text" data-i18n="home.feat2.text">Every change, note and email kept for the full compliance window.</div>
-                </div>
-                <div class="tile">
-                    <div class="tile__index">03</div>
-                    <div class="tile__title" data-i18n="home.feat3.title">English and Serbian</div>
-                    <div class="tile__text" data-i18n="home.feat3.text">Full interface in both languages, extendable to further locales.</div>
-                </div>
-                <div class="tile">
-                    <div class="tile__index">04</div>
-                    <div class="tile__title" data-i18n="home.feat4.title">Runs on your infrastructure</div>
-                    <div class="tile__text" data-i18n="home.feat4.text">Deployed inside your environment. Case data does not leave it.</div>
-                </div>
+            <div class="status-line">
+                <span class="status-dot"></span>
+                <span data-i18n="home.hero.status">In pilot with a European bank's fraud operations team.</span>
             </div>
         </div>
 
@@ -163,179 +137,112 @@
         </div>
     </section>
 
-    <!-- 01 The problem -->
+    <!-- Built for -->
     <section class="page-section">
-        <div class="eyebrow"><span>01</span><span data-i18n="home.problem.eyebrow">The problem</span></div>
-        <h2 class="section-title" style="margin-top:44px;max-width:22ch;" data-i18n="home.problem.title">Fraud teams are working around their tools.</h2>
-        <div class="grid grid--3" style="margin-top:64px;">
-            <div class="segment" data-reveal>
-                <h3 data-i18n="home.problem.c1.title">Cases live in inboxes</h3>
-                <p data-i18n="home.problem.c1.text">Alerts arrive by email, evidence sits in attachments, and the current state of a case is whatever the last reply says.</p>
-            </div>
-            <div class="segment" data-reveal data-reveal-delay="80">
-                <h3 data-i18n="home.problem.c2.title">Deadlines are counted by hand</h3>
-                <p data-i18n="home.problem.c2.text">Legal windows are measured in hours. A spreadsheet does not wake anyone up when one is about to close.</p>
-            </div>
-            <div class="segment" data-reveal data-reveal-delay="160">
-                <h3 data-i18n="home.problem.c3.title">Audit is rebuilt after the fact</h3>
-                <p data-i18n="home.problem.c3.text">When a regulator asks what happened, someone reconstructs the timeline from mail archives and memory.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 02 The product -->
-    <section class="page-section">
-        <div class="eyebrow"><span>02</span><span data-i18n="home.product.eyebrow">The product</span></div>
-        <div class="split" style="gap:48px;align-items:end;margin-top:44px;">
-            <h2 class="section-title" data-i18n="home.product.title">What Correlis does</h2>
-            <p class="section-lead" style="max-width:46ch;" data-i18n="home.product.lead">One record per case, held to the same deadlines and permissions your compliance function already works to.</p>
-        </div>
-
-        <div class="tile-grid tile-grid--3" style="margin-top:56px;" data-reveal>
-            <div class="tile">
-                <div class="tile__index">01</div>
-                <h3 class="tile__title" data-i18n="home.product.t1.title">Case intake and creation</h3>
-                <p class="tile__text" data-i18n="home.product.t1.text">A guided wizard captures payer, recipient, transactions and channel, with account validation as you type.</p>
-            </div>
-            <div class="tile">
-                <div class="tile__index">02</div>
-                <h3 class="tile__title" data-i18n="home.product.t2.title">The case as one story</h3>
-                <p class="tile__text" data-i18n="home.product.t2.text">Money flow, evidence, notes and correspondence on a single scrolling record instead of a stack of tabs.</p>
-            </div>
-            <div class="tile">
-                <div class="tile__index">03</div>
-                <h3 class="tile__title" data-i18n="home.product.t3.title">Deadline alerts</h3>
-                <p class="tile__text" data-i18n="home.product.t3.text">Every legal window becomes a countdown on the queue, escalating before it breaches rather than after.</p>
-            </div>
-            <div class="tile">
-                <div class="tile__index">04</div>
-                <h3 class="tile__title" data-i18n="home.product.t4.title">Email from inside the case</h3>
-                <p class="tile__text" data-i18n="home.product.t4.text">Templated notifications to clients and counterpart banks, edited before sending and logged against the case.</p>
-            </div>
-            <div class="tile">
-                <div class="tile__index">05</div>
-                <h3 class="tile__title" data-i18n="home.product.t5.title">Audit trail and activity log</h3>
-                <p class="tile__text" data-i18n="home.product.t5.text">Who changed what, when, and from where — retained for ten years and exportable on request.</p>
-            </div>
-            <div class="tile">
-                <div class="tile__index">06</div>
-                <h3 class="tile__title" data-i18n="home.product.t6.title">Analytics and back office</h3>
-                <p class="tile__text" data-i18n="home.product.t6.text">Volumes, recovery rates, ageing and analyst load, plus user, role and configuration management.</p>
-            </div>
-        </div>
-        <p class="section-note">
-            <span data-i18n="home.product.note">Also included: saved queue views, bulk actions, command palette, CSV and PDF export, in-app support tickets, light and dark interface.</span>
-            <a href="correlis.html" data-i18n="home.product.noteLink">Full product detail →</a>
-        </p>
-    </section>
-
-    <!-- 03 How it works -->
-    <section class="page-section">
-        <div class="eyebrow"><span>03</span><span data-i18n="home.how.eyebrow">How it works</span></div>
-        <h2 class="section-title" style="margin-top:44px;" data-i18n="home.how.title">Four steps, one record.</h2>
-
-        <div class="grid grid--4" style="margin-top:56px;">
-            <div class="step" data-reveal>
-                <div class="step__label">STEP 1</div>
-                <h3 data-i18n="home.how.s1.title">Intake</h3>
-                <p data-i18n="home.how.s1.text">The case is opened with the parties, amounts and channel recorded once and validated.</p>
-            </div>
-            <div class="step" data-reveal data-reveal-delay="60">
-                <div class="step__label">STEP 2</div>
-                <h3 data-i18n="home.how.s2.title">Triage</h3>
-                <p data-i18n="home.how.s2.text">The queue orders work by what breaches first, not by what arrived first.</p>
-            </div>
-            <div class="step" data-reveal data-reveal-delay="120">
-                <div class="step__label">STEP 3</div>
-                <h3 data-i18n="home.how.s3.title">Act</h3>
-                <p data-i18n="home.how.s3.text">Holds requested, counterpart banks notified, evidence attached, status moved with a reason.</p>
-            </div>
-            <div class="step" data-reveal data-reveal-delay="180">
-                <div class="step__label">STEP 4</div>
-                <h3 data-i18n="home.how.s4.title">Close and report</h3>
-                <p data-i18n="home.how.s4.text">Outcome recorded, report filed, and the whole trail preserved for the retention period.</p>
-            </div>
-        </div>
-
-        <div class="grid grid--2" style="margin-top:56px;">
-            <figure data-reveal>
-                <div class="frame frame--tall">
-                    <img src="assets/images/correlis/corellis-intake.png" alt="Correlis case intake wizard" loading="lazy">
-                </div>
-                <figcaption data-i18n="home.how.cap1">Case intake</figcaption>
-            </figure>
-            <figure data-reveal data-reveal-delay="80">
-                <div class="frame frame--tall">
-                    <img src="assets/images/correlis/corellis-case-detail.png" alt="Correlis case detail with money flow and timeline" loading="lazy">
-                </div>
-                <figcaption data-i18n="home.how.cap2">Case detail</figcaption>
-            </figure>
-        </div>
-    </section>
-
-    <!-- 04 Built for -->
-    <section class="page-section">
-        <div class="eyebrow"><span>04</span><span data-i18n="home.builtfor.eyebrow">Built for</span></div>
-        <div class="grid grid--4" style="margin-top:48px;">
-            <div class="segment" data-reveal>
+        <div class="eyebrow" data-i18n="home.builtfor.eyebrow">Built for</div>
+        <div class="card-grid card-grid--4" style="margin-top:40px;" data-reveal>
+            <div class="card">
                 <h3 data-i18n="home.builtfor.b1.title">Banks</h3>
                 <p data-i18n="home.builtfor.b1.text">Card and transfer fraud, money mule networks, account takeover, interbank hold requests.</p>
             </div>
-            <div class="segment" data-reveal data-reveal-delay="60">
+            <div class="card">
                 <h3 data-i18n="home.builtfor.b2.title">Insurers</h3>
                 <p data-i18n="home.builtfor.b2.text">Claim investigations with documentary evidence and statutory response windows.</p>
             </div>
-            <div class="segment" data-reveal data-reveal-delay="120">
+            <div class="card">
                 <h3 data-i18n="home.builtfor.b3.title">Gaming operators</h3>
                 <p data-i18n="home.builtfor.b3.text">Bonus abuse, collusion, payment fraud and account sharing, handled under licence obligations.</p>
             </div>
-            <div class="segment" data-reveal data-reveal-delay="180">
+            <div class="card">
                 <h3 data-i18n="home.builtfor.b4.title">Payment providers</h3>
                 <p data-i18n="home.builtfor.b4.text">Disputes and chargeback investigations that touch several institutions at once.</p>
             </div>
         </div>
     </section>
 
-    <!-- 05 Engineering services (dark) -->
+    <!-- How it works -->
+    <section class="page-section">
+        <div class="eyebrow" data-i18n="home.how.eyebrow">How it works</div>
+        <div class="split" style="gap:56px;align-items:end;margin-top:20px;">
+            <h2 class="section-title" data-i18n="home.how.title">Four steps, one record.</h2>
+            <p class="section-lead" data-i18n="home.how.lead">From the moment an alert lands to the report you file with a regulator, Correlis keeps one continuous record you can show your work with.</p>
+        </div>
+
+        <div class="how-media" data-reveal>
+            <img class="is-active" data-how-image="0" src="assets/images/correlis/corellis-intake.png" alt="Intake">
+            <img data-how-image="1" src="assets/images/correlis/corellis-case-detail.png" alt="Investigation">
+            <img data-how-image="2" src="assets/images/correlis/corellis-activity-log.png" alt="Deadlines &amp; audit">
+            <img data-how-image="3" src="assets/images/correlis/corellis-analytics.png" alt="Reporting">
+        </div>
+
+        <div class="how-steps">
+            <button type="button" class="how-step is-active" data-how-step="0">
+                <div class="how-step__number">1</div>
+                <div class="how-step__title" data-i18n="home.how.s1.title">Intake</div>
+                <div class="how-step__desc" data-i18n="home.how.s1.text">Alerts and referrals land in one queue, deduplicated and assigned by rule.</div>
+            </button>
+            <button type="button" class="how-step" data-how-step="1">
+                <div class="how-step__number">2</div>
+                <div class="how-step__title" data-i18n="home.how.s2.title">Investigation</div>
+                <div class="how-step__desc" data-i18n="home.how.s2.text">Evidence, notes and account activity live on the case, not in someone's inbox.</div>
+            </button>
+            <button type="button" class="how-step" data-how-step="2">
+                <div class="how-step__number">3</div>
+                <div class="how-step__title" data-i18n="home.how.s3.title">Deadlines &amp; audit</div>
+                <div class="how-step__desc" data-i18n="home.how.s3.text">Every action is timestamped and held to the legal window that applies.</div>
+            </button>
+            <button type="button" class="how-step" data-how-step="3">
+                <div class="how-step__number">4</div>
+                <div class="how-step__title" data-i18n="home.how.s4.title">Reporting</div>
+                <div class="how-step__desc" data-i18n="home.how.s4.text">Case outcomes roll up into the numbers compliance and regulators ask for.</div>
+            </button>
+        </div>
+    </section>
+
+    <!-- Engineering services (dark) -->
     <section class="section--dark">
         <div class="container">
-            <div class="eyebrow"><span>05</span><span data-i18n="home.eng.eyebrow">Engineering services</span></div>
-            <div class="split" style="gap:56px;align-items:end;margin-top:44px;">
+            <div class="eyebrow" data-i18n="home.eng.eyebrow">Engineering services</div>
+            <div class="split" style="gap:56px;align-items:end;margin-top:20px;">
                 <h2 class="section-title" data-i18n="home.eng.title">We also build software for other teams.</h2>
                 <p style="color:var(--dark-ink-secondary);font-size:17px;max-width:48ch;" data-i18n="home.eng.lead">Correlis is what we build for ourselves. The same people are available to your projects — as a delivery team, as embedded engineers, or for a single specialist role you cannot fill.</p>
             </div>
 
-            <div class="tile-grid tile-grid--4" style="margin-top:56px;" data-reveal>
-                <div class="tile"><h3 class="tile__title" style="font-size:16px;" data-i18n="home.eng.t1.title">Web</h3><p class="tile__text" data-i18n="home.eng.t1.text">React, TypeScript, Node, .NET, Java. Dashboards, portals, internal tooling.</p></div>
-                <div class="tile"><h3 class="tile__title" style="font-size:16px;" data-i18n="home.eng.t2.title">Mobile</h3><p class="tile__text" data-i18n="home.eng.t2.text">iOS, Android and React Native, including regulated and payment apps.</p></div>
-                <div class="tile"><h3 class="tile__title" style="font-size:16px;" data-i18n="home.eng.t3.title">Backend and APIs</h3><p class="tile__text" data-i18n="home.eng.t3.text">Core banking integrations, payment rails, event pipelines, legacy modernisation.</p></div>
-                <div class="tile"><h3 class="tile__title" style="font-size:16px;" data-i18n="home.eng.t4.title">DevOps and infrastructure</h3><p class="tile__text" data-i18n="home.eng.t4.text">Kubernetes, CI/CD, on-premise and cloud, observability, disaster recovery.</p></div>
-                <div class="tile"><h3 class="tile__title" style="font-size:16px;" data-i18n="home.eng.t5.title">Data and AI</h3><p class="tile__text" data-i18n="home.eng.t5.text">Warehousing, reporting, model integration and LLM features with a human in the loop.</p></div>
-                <div class="tile"><h3 class="tile__title" style="font-size:16px;" data-i18n="home.eng.t6.title">QA and automation</h3><p class="tile__text" data-i18n="home.eng.t6.text">Test strategy, automated regression suites, release verification.</p></div>
-                <div class="tile"><h3 class="tile__title" style="font-size:16px;" data-i18n="home.eng.t7.title">Product and design</h3><p class="tile__text" data-i18n="home.eng.t7.text">Discovery, specification and interface design for operational software.</p></div>
-                <div class="tile"><h3 class="tile__title" style="font-size:16px;" data-i18n="home.eng.t8.title">Security and compliance</h3><p class="tile__text" data-i18n="home.eng.t8.text">Access control, audit requirements, GDPR, penetration test remediation.</p></div>
+            <div class="card-grid card-grid--3" style="margin-top:56px;" data-reveal>
+                <div class="card">
+                    <h3 data-i18n="home.eng.t1.title">Product engineering</h3>
+                    <p data-i18n="home.eng.t1.text">Web and mobile products built end to end, from first prototype to production.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="home.eng.t2.title">Platform and infrastructure</h3>
+                    <p data-i18n="home.eng.t2.text">The systems, pipelines and operational tooling that keep software reliable at scale.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="home.eng.t3.title">Data and automation</h3>
+                    <p data-i18n="home.eng.t3.text">Reporting, integrations and AI-assisted features with a human in the loop.</p>
+                </div>
             </div>
-            <div style="margin-top:32px;">
-                <a href="services.html" class="btn btn--ghost-dark" data-i18n="home.eng.cta">How we engage</a>
+            <div style="margin-top:36px;">
+                <a href="mailto:office@encodius.com?subject=Engineering%20enquiry" class="btn btn--ghost-dark" data-i18n="home.eng.cta">Talk to us</a>
             </div>
         </div>
     </section>
 
-    <!-- 06 Company -->
+    <!-- Company -->
     <section class="page-section" id="company" style="scroll-margin-top:96px;">
-        <div class="eyebrow"><span>06</span><span data-i18n="home.company.eyebrow">Company</span></div>
-        <h2 class="section-title" style="margin-top:44px;max-width:24ch;" data-i18n="home.company.title">Two founders, one engineering bench.</h2>
+        <div class="eyebrow" data-i18n="home.company.eyebrow">Company</div>
+        <h2 class="section-title" style="margin-top:20px;max-width:24ch;" data-i18n="home.company.title">Two founders, one engineering bench.</h2>
         <p class="company__intro" data-i18n="home.company.lead">Encodius is a Serbian software company. We spent our careers building systems for banks and payment institutions before starting it, and Correlis came out of watching fraud teams work.</p>
 
-        <div class="grid grid--2 company__team">
-            <div class="team-member" data-reveal>
+        <div class="grid grid--2 company__team" data-reveal>
+            <div class="team-member">
                 <div class="team-member__photo">
                     <img src="assets/images/team/nemanja.png" alt="Nemanja, Co-founder and CEO" loading="lazy">
                 </div>
                 <div class="team-member__name" data-i18n="home.company.ceoName">Nemanja</div>
                 <div class="team-member__role" data-i18n="home.company.ceoRole">Co-founder, CEO</div>
             </div>
-            <div class="team-member" data-reveal data-reveal-delay="80">
+            <div class="team-member">
                 <div class="team-member__photo">
                     <img src="assets/images/team/dusan.jpeg" alt="Dušan, Co-founder and CTO" loading="lazy">
                 </div>
@@ -343,26 +250,11 @@
                 <div class="team-member__role" data-i18n="home.company.ctoRole">Co-founder, CTO</div>
             </div>
         </div>
-
-        <div class="grid grid--3 company__stats">
-            <div class="stat">
-                <div class="stat__value"><span data-count-to="12" data-count-suffix=" years">12 years</span></div>
-                <div class="stat__label" data-i18n="home.company.stat1.label">building software for banks and payment institutions.</div>
-            </div>
-            <div class="stat">
-                <div class="stat__value"><span data-count-to="7" data-count-suffix=" specialists">7 specialists</span></div>
-                <div class="stat__label" data-i18n="home.company.stat2.label">on our contractor bench across engineering disciplines.</div>
-            </div>
-            <div class="stat">
-                <div class="stat__value" data-i18n="home.company.stat3.value">Kragujevac</div>
-                <div class="stat__label" data-i18n="home.company.stat3.label">registered in Serbia, working with clients across Europe.</div>
-            </div>
-        </div>
     </section>
 
-    <!-- 07 Contact -->
+    <!-- Contact -->
     <section class="page-section contact-section" id="contact" style="scroll-margin-top:96px;">
-        <div class="eyebrow"><span>07</span><span data-i18n="home.contact.eyebrow">Contact</span></div>
+        <div class="eyebrow" data-i18n="home.contact.eyebrow">Contact</div>
         <div class="split">
             <div>
                 <h2 class="section-title" data-i18n="home.contact.title">Let's talk.</h2>
@@ -411,8 +303,6 @@
                 <span class="footer__brand-text">Encodius</span>
             </div>
             <nav class="footer__nav">
-                <a href="correlis.html" data-i18n="footer.correlis">Correlis</a>
-                <a href="services.html" data-i18n="nav.services">Services</a>
                 <a href="#company" data-i18n="nav.company">Company</a>
                 <a href="mailto:office@encodius.com">office@encodius.com</a>
             </nav>
@@ -425,7 +315,6 @@
 
     <script defer src="js/translations.js"></script>
     <script defer src="js/animations.js"></script>
-    <script defer src="js/hero-field.js"></script>
     <script defer src="js/interactions.js"></script>
     <script defer src="js/app.js"></script>
 </body>

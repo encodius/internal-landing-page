@@ -47,40 +47,39 @@ function initMobileNav() {
 }
 
 /* ============================================
-   PRODUCT SCREENSHOT TABS (Correlis page)
+   HOW IT WORKS — autoplaying step tabs + crossfade media
    ============================================ */
-function initShotTabs() {
-    const tabs = document.querySelectorAll('[data-shot-tab]');
-    const image = document.querySelector('[data-shot-image]');
-    const caption = document.getElementById('shot-caption');
-    if (!tabs.length || !image) return;
+function initHowItWorks() {
+    const steps = document.querySelectorAll('[data-how-step]');
+    const images = document.querySelectorAll('[data-how-image]');
+    if (!steps.length || !images.length) return;
 
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            if (tab.classList.contains('active')) return;
+    let timer = null;
 
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
+    function select(index) {
+        steps.forEach(step => {
+            step.classList.toggle('is-active', Number(step.getAttribute('data-how-step')) === index);
+        });
+        images.forEach(img => {
+            img.classList.toggle('is-active', Number(img.getAttribute('data-how-image')) === index);
+        });
+    }
 
-            const src = tab.getAttribute('data-shot-src');
-            const alt = tab.getAttribute('data-shot-alt') || '';
-            const key = tab.getAttribute('data-shot-key');
+    function startAutoplay() {
+        clearInterval(timer);
+        timer = setInterval(() => {
+            const active = document.querySelector('[data-how-step].is-active');
+            const current = active ? Number(active.getAttribute('data-how-step')) : 0;
+            select((current + 1) % steps.length);
+        }, 4500);
+    }
 
-            image.style.transition = 'opacity 0.32s ease';
-            image.style.opacity = '0';
-            setTimeout(() => {
-                image.src = src;
-                image.alt = alt;
-                if (caption && key) {
-                    caption.setAttribute('data-i18n', key);
-                    const lang = localStorage.getItem('encodius-lang') || 'en';
-                    const translation = window.translations?.[lang]?.[key];
-                    if (translation) caption.textContent = translation;
-                }
-                requestAnimationFrame(() => requestAnimationFrame(() => {
-                    image.style.opacity = '1';
-                }));
-            }, 160);
+    steps.forEach(step => {
+        step.addEventListener('click', () => {
+            select(Number(step.getAttribute('data-how-step')));
+            startAutoplay();
         });
     });
+
+    startAutoplay();
 }

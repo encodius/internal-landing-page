@@ -23,11 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileNav();
     initHeaderScrollState();
     initContactForm();
-    initShotTabs();
+    initHowItWorks();
     initLanguage();
     initScrollReveal();
-    initStatCounters();
-    window.ENCODIUS_FIELD?.init();
 });
 
 // ============================================

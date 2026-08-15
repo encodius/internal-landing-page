@@ -10,10 +10,10 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 14px 26px;
+    padding: 15px 28px;
     font-size: 1rem;
-    font-weight: 500;
-    border-radius: var(--radius-sm);
+    font-weight: 700;
+    border-radius: var(--radius-pill);
     border: none;
     cursor: pointer;
     transition: all var(--transition-base);
@@ -21,43 +21,26 @@
 }
 
 .btn--primary {
-    background: var(--ink);
-    color: var(--bg);
+    background: linear-gradient(135deg, #2F6FED, #1D4ED8);
+    color: #FFFFFF;
+    box-shadow: 0 10px 24px rgba(29, 78, 216, 0.3);
 }
 
 .btn--primary:hover {
-    background: #23272E;
     color: #FFFFFF;
-}
-
-.btn--secondary {
-    background: transparent;
-    color: var(--ink);
-    border: 1px solid var(--border-cta);
-}
-
-.btn--secondary:hover {
-    border-color: var(--ink);
-}
-
-.btn--on-dark {
-    background: var(--bg);
-    color: var(--ink);
-}
-
-.btn--on-dark:hover {
-    background: #FFFFFF;
+    box-shadow: 0 12px 28px rgba(29, 78, 216, 0.42);
+    transform: translateY(-1px);
 }
 
 .btn--ghost-dark {
     background: transparent;
     color: var(--dark-ink);
-    border: 1px solid rgba(255, 255, 255, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .btn--ghost-dark:hover {
-    border-color: var(--dark-ink);
-    color: #FFFFFF;
+    border-color: var(--dark-ink-muted);
+    color: var(--dark-ink-muted);
 }
 
 .btn--full {
@@ -78,10 +61,8 @@
 }
 
 .form-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
     color: var(--ink-muted);
 }
 
@@ -103,7 +84,8 @@
 }
 
 .form-input:focus {
-    border-color: var(--ink);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.12);
 }
 
 .form-input--textarea {
@@ -156,52 +138,6 @@
     height: auto;
 }
 
-.frame--tall {
-    height: 420px;
-}
-
-.frame--tall img {
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-}
-
-figure {
-    margin: 0;
-}
-
-figcaption {
-    margin-top: 12px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-}
-
-/* ============================================
-   FEATURE LIST — dark hero panel, home page
-   ============================================ */
-.feature-list .tile {
-    padding: 22px 24px;
-}
-
-.feature-list .tile__index {
-    margin-bottom: 6px;
-    font-size: 11px;
-}
-
-.feature-list .tile__title {
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 4px;
-}
-
-.feature-list .tile__text {
-    font-size: 15px;
-    color: var(--ink-muted);
-}
-
 /* ============================================
    STATUS DOT
    ============================================ */
@@ -233,25 +169,6 @@ figcaption {
 }
 
 /* ============================================
-   STATS
-   ============================================ */
-.stat {
-    display: block;
-}
-
-.stat__value {
-    font-size: 34px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-}
-
-.stat__label {
-    color: var(--ink-muted);
-    font-size: 15px;
-    margin-top: 6px;
-}
-
-/* ============================================
    TEAM
    ============================================ */
 .team-member__photo {
@@ -278,164 +195,112 @@ figcaption {
 }
 
 .team-member__role {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    margin-top: 6px;
-}
-
-/* ============================================
-   CAPABILITY TABLE — services page
-   ============================================ */
-.cap-table {
-    border-top: 1px solid var(--ink);
-}
-
-.cap-table__row {
-    display: grid;
-    grid-template-columns: 220px minmax(0, 1fr) 300px;
-    gap: 32px;
-    padding: 22px 0;
-    border-bottom: 1px solid var(--border);
-    align-items: start;
-}
-
-.cap-table__row--head {
-    padding: 12px 0;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-}
-
-.cap-table__row h3 {
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 600;
-}
-
-.cap-table__row p {
-    color: var(--ink-secondary);
-    font-size: 16px;
-}
-
-.cap-table__stack {
-    font-family: var(--font-mono);
-    font-size: 13px;
     color: var(--ink-muted);
-}
-
-@media (max-width: 1100px) {
-    .cap-table__row {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 8px;
-    }
-    .cap-table__row--head :not(:first-child) {
-        display: none;
-    }
-    .cap-table__row > p:last-child {
-        padding-top: 4px;
-    }
+    margin-top: 4px;
 }
 
 /* ============================================
-   CAPABILITY LIST — correlis page
+   HOW IT WORKS — interactive step tabs + crossfade media
    ============================================ */
-.cap-list {
-    display: grid;
-}
-
-.cap-list__item {
-    border-top: 1px solid var(--border);
-    padding: 14px 0;
-    font-size: 16px;
-    color: var(--ink-nav);
-}
-
-/* ============================================
-   TABS — correlis screenshot switcher
-   ============================================ */
-.shot-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    border-bottom: 1px solid var(--border);
-}
-
-.shot-tabs button {
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    padding: 10px 14px;
-    cursor: pointer;
-    font-size: 15px;
-    color: var(--ink-muted);
-    font-family: inherit;
-}
-
-.shot-tabs button.active {
-    border-bottom-color: var(--ink);
-    color: var(--ink);
-    font-weight: 500;
-}
-
-.shot-frame {
-    margin-top: 24px;
-    height: 680px;
-}
-
-.shot-frame img {
-    transition: opacity 0.32s ease;
-}
-
-.shot-caption {
-    margin-top: 14px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--ink-faint);
-}
-
-/* ============================================
-   CTA BANNER — dark strip with heading + button
-   ============================================ */
-.cta-banner {
+.how-media {
+    margin-top: 56px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 70px rgba(10, 24, 50, 0.14);
+    position: relative;
+    aspect-ratio: 16 / 9;
     background: var(--dark-bg);
-    color: var(--dark-ink);
 }
 
-.cta-banner__inner {
-    padding: 96px 0;
+.how-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.how-media img.is-active {
+    opacity: 1;
+}
+
+.how-steps {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 48px;
-    align-items: end;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 20px;
 }
 
-.cta-banner h2 {
-    font-size: clamp(30px, 3.4vw, 46px);
-    line-height: 1.08;
-    letter-spacing: -0.028em;
-    max-width: 26ch;
+.how-step {
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+    color: var(--ink);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    background: var(--bg-inset);
+    border: 1px solid var(--border);
+    transition: all var(--transition-fast);
 }
 
-@media (max-width: 1100px) {
-    .cta-banner__inner {
-        grid-template-columns: minmax(0, 1fr);
-        align-items: start;
-    }
+.how-step__number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 13px;
+    margin-bottom: 12px;
+    background: var(--accent-bg);
+    color: var(--accent);
+}
+
+.how-step__title {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.how-step__desc {
+    font-size: 13px;
+    opacity: 0.75;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+.how-step.is-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #FFFFFF;
+    box-shadow: 0 12px 28px rgba(29, 78, 216, 0.28);
+}
+
+.how-step.is-active .how-step__number {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
 }
 
 /* ============================================
    COMPONENTS RESPONSIVE
    ============================================ */
-@media (max-width: 760px) {
-    .frame--tall {
-        height: 260px;
+@media (max-width: 1100px) {
+    .how-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .shot-frame {
-        height: 360px;
+}
+
+@media (max-width: 760px) {
+    .how-steps {
+        grid-template-columns: minmax(0, 1fr);
     }
     .team-member__photo {
         aspect-ratio: 1;
