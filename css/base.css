@@ -210,6 +210,8 @@ a:hover {
 .card-grid {
     display: grid;
     gap: 24px;
+    /* Uniform card height across every row, not just within one */
+    grid-auto-rows: 1fr;
 }
 
 .card-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -260,16 +262,31 @@ a:hover {
     color: var(--dark-ink-secondary);
 }
 
-/* Hero blobs / gradient text */
-@keyframes blobFloatA {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(40px, 30px) scale(1.08); }
+/* Hero honeycomb / gradient text */
+/* Closed loops (0% == 100%) rather than `alternate`, so the drift never
+   retraces the same straight line — the eye reads a wandering path as
+   movement where a ping-pong just reads as static. */
+@keyframes hexFloatA {
+    0%   { transform: translate(0, 0) rotate(0deg) scale(1);        opacity: 0.9; }
+    25%  { transform: translate(52px, 30px) rotate(3deg) scale(1.06); opacity: 1; }
+    50%  { transform: translate(20px, 62px) rotate(-2deg) scale(1.02); opacity: 0.94; }
+    75%  { transform: translate(-30px, 26px) rotate(4deg) scale(1.07); opacity: 1; }
+    100% { transform: translate(0, 0) rotate(0deg) scale(1);        opacity: 0.9; }
 }
 
-@keyframes blobFloatB {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(-30px, 25px) scale(1.05); }
+@keyframes hexFloatB {
+    0%   { transform: translate(0, 0) rotate(0deg) scale(1);         opacity: 0.92; }
+    25%  { transform: translate(-38px, 34px) rotate(-3deg) scale(1.05); opacity: 1; }
+    50%  { transform: translate(24px, 56px) rotate(2deg) scale(1.01);  opacity: 0.9; }
+    75%  { transform: translate(42px, 16px) rotate(-4deg) scale(1.05); opacity: 0.98; }
+    100% { transform: translate(0, 0) rotate(0deg) scale(1);         opacity: 0.92; }
 }
+
+@keyframes hexCellFade {
+    0%, 100% { opacity: 0; }
+    50%      { opacity: 1; }
+}
+
 
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
@@ -277,7 +294,11 @@ a:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero__blob { animation: none !important; }
+    .hero__comb,
+    .hero__comb-edge use { animation: none !important; }
+    /* Edge cells rest at opacity 0, so give them a static value once the
+       fade is off or they would vanish entirely */
+    .hero__comb-edge use { opacity: 0.5; }
     .hero__title-accent { animation: none !important; }
 }
 

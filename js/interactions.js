@@ -1,6 +1,6 @@
 /* ============================================
    ENCODIUS - Interactions
-   Mobile nav, header scroll state, product tabs
+   Header scroll state, product tabs
    ============================================ */
 
 function initHeaderScrollState() {
@@ -12,38 +12,6 @@ function initHeaderScrollState() {
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
-}
-
-function initMobileNav() {
-    const navToggle = document.getElementById('nav-toggle');
-    const navMobile = document.getElementById('nav-mobile');
-    const navMobileClose = document.getElementById('nav-mobile-close');
-    const navBackdrop = document.getElementById('nav-backdrop');
-
-    if (!navMobile) return;
-
-    const navMobileLinks = navMobile.querySelectorAll('a');
-
-    function closeMenu() {
-        navMobile.classList.remove('active');
-        navBackdrop?.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    function openMenu() {
-        navMobile.classList.add('active');
-        navBackdrop?.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    navToggle?.addEventListener('click', openMenu);
-    navMobileClose?.addEventListener('click', closeMenu);
-    navBackdrop?.addEventListener('click', closeMenu);
-    navMobileLinks.forEach(link => link.addEventListener('click', closeMenu));
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeMenu();
-    });
 }
 
 /* ============================================
@@ -81,5 +49,20 @@ function initHowItWorks() {
         });
     });
 
-    startAutoplay();
+    // Don't start the carousel until the section actually scrolls into view —
+    // otherwise it's already several steps in by the time the user gets there.
+    const section = steps[0].closest('section');
+    if (!section || !('IntersectionObserver' in window)) {
+        startAutoplay();
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            startAutoplay();
+            observer.disconnect();
+        });
+    }, { threshold: 0.3 });
+    observer.observe(section);
 }

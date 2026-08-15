@@ -9,10 +9,6 @@
     padding: var(--section-padding) 32px 0;
 }
 
-.page-section:first-of-type {
-    padding-top: 96px;
-}
-
 .section--dark {
     background: var(--dark-bg);
     color: var(--dark-ink);
@@ -32,8 +28,55 @@
    ============================================ */
 .hero {
     position: relative;
+    padding-top: 96px;
+    padding-bottom: 120px;
+    background: var(--dark-bg);
+    color: var(--dark-ink);
+}
+
+.hero .tag {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.16);
+    color: var(--dark-ink-muted);
+}
+
+.hero .status-line {
+    color: var(--dark-ink-secondary);
+}
+
+.hero .status-dot {
+    /* --accent is too dark to read against --dark-bg */
+    background: var(--dark-ink-muted);
+}
+
+.hero .frame {
+    /* No light hairline: against a light screenshot on a dark ground it
+       reads as a white outline rather than an edge */
+    background: transparent;
+    border-color: transparent;
+    /* A dark shadow is invisible on --dark-bg, so the panel is separated
+       by an accent glow instead */
+    box-shadow: 0 26px 70px rgba(29, 78, 216, 0.20);
+}
+
+.hero .hero__media__inner:hover {
+    box-shadow: 0 34px 90px rgba(47, 111, 237, 0.36);
+}
+
+.hero__hexes {
+    position: absolute;
+    inset: 0;
     overflow: hidden;
-    padding-top: 120px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero__content {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
 }
 
 .hero__inner {
@@ -47,10 +90,12 @@
     line-height: 1.04;
     letter-spacing: -0.03em;
     font-weight: 800;
+    color: var(--dark-ink);
 }
 
 .hero__title-accent {
-    background: linear-gradient(90deg, #1D4ED8, #5B8DEF, #1D4ED8);
+    /* Lifted off the light-background palette so it reads on --dark-bg */
+    background: linear-gradient(90deg, #5B8DEF, #8AB4F8, #5B8DEF);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -59,7 +104,7 @@
 }
 
 .hero p {
-    color: var(--ink-secondary);
+    color: var(--dark-ink-secondary);
     font-size: 19px;
     line-height: 1.6;
     max-width: 56ch;
@@ -73,43 +118,57 @@
     margin-top: 40px;
 }
 
-.hero__blob {
+.hero__comb {
     position: absolute;
-    border-radius: 50%;
-    filter: blur(10px);
-    pointer-events: none;
-    z-index: 0;
+    height: auto;
+    overflow: visible;
+    color: rgba(91, 141, 239, 0.26);
+    will-change: transform, opacity;
 }
 
-.hero__blob--a {
-    top: -160px;
-    right: -120px;
-    width: 520px;
-    height: 520px;
-    background: radial-gradient(circle, rgba(47, 111, 237, 0.35), rgba(47, 111, 237, 0) 70%);
-    animation: blobFloatA 9s ease-in-out infinite alternate;
+.hero__comb--right {
+    top: 30px;
+    right: -70px;
+    width: 330px;
+    animation: hexFloatB 31s ease-in-out infinite;
 }
 
-.hero__blob--b {
-    top: 60px;
-    left: -180px;
-    width: 460px;
-    height: 460px;
-    background: radial-gradient(circle, rgba(91, 141, 239, 0.28), rgba(91, 141, 239, 0) 70%);
-    animation: blobFloatB 11s ease-in-out infinite alternate;
+.hero__comb--left {
+    bottom: 30px;
+    left: -80px;
+    width: 250px;
+    animation: hexFloatA 24s ease-in-out infinite;
 }
+
+.hero__comb use {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.25;
+}
+
+/* Outer ring only — fades fully out and back, staggered by the inline
+   delays in the markup so no two cells share a phase */
+.hero__comb-edge use {
+    opacity: 0;
+    animation: hexCellFade 10s ease-in-out infinite;
+}
+
+.hero__comb-edge use:nth-of-type(3n) { animation-duration: 13.5s; }
+.hero__comb-edge use:nth-of-type(3n + 1) { animation-duration: 8.5s; }
 
 .hero__media {
     margin-top: 72px;
     position: relative;
     z-index: 1;
-    transform-origin: bottom center;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
 }
 
-.hero__media:hover {
-    transform: perspective(1400px) rotateX(1.2deg) scale(1.01);
-    box-shadow: 0 40px 90px rgba(10, 24, 50, 0.2);
+.hero__media__inner {
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hero__media__inner:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px rgba(10, 24, 50, 0.16);
 }
 
 /* ============================================

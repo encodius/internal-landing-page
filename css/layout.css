@@ -10,15 +10,19 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.86);
-    -webkit-backdrop-filter: saturate(180%) blur(10px);
-    backdrop-filter: saturate(180%) blur(10px);
-    border-bottom: 1px solid var(--border);
-    transition: box-shadow var(--transition-base);
+    /* Opaque, not translucent: the header stacks above the white body
+       rather than over the hero, so any alpha here washes out to grey */
+    background: var(--dark-bg);
+    color: var(--dark-ink);
+    /* Seamless against the hero at rest; only separates once it is
+       floating over the light sections below */
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 .header.scrolled {
-    box-shadow: 0 1px 12px rgba(12, 16, 23, 0.06);
+    border-bottom-color: var(--dark-border);
+    box-shadow: 0 1px 16px rgba(3, 9, 20, 0.45);
 }
 
 .nav {
@@ -32,59 +36,27 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: var(--ink);
+    color: var(--dark-ink);
     flex-shrink: 0;
+    /* It is a <button> now, so strip the UA chrome */
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
 }
 
 .nav__logo-mark {
-    width: 24px;
-    height: 24px;
-    border-radius: 3px;
-    background: var(--ink);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 3px;
-    padding: 0 5px;
+    width: 34px;
+    height: auto;
+    display: block;
     flex-shrink: 0;
 }
-
-.nav__logo-mark span {
-    display: block;
-    height: 2px;
-    width: 100%;
-    background: var(--bg);
-}
-
-.nav__logo-mark span:nth-child(2) { width: 60%; }
-.nav__logo-mark span:nth-child(3) { width: 85%; }
 
 .nav__logo-text {
     font-size: 18px;
     font-weight: 600;
     letter-spacing: -0.02em;
-}
-
-.nav__menu {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    list-style: none;
-    font-size: 15px;
-    margin-left: 8px;
-}
-
-.nav__link {
-    color: var(--ink-nav);
-}
-
-.nav__link:hover {
-    color: var(--ink);
-}
-
-.nav__link--active {
-    color: var(--ink);
-    font-weight: 500;
 }
 
 .nav__controls {
@@ -109,17 +81,22 @@
     border: none;
     padding: 2px 1px;
     cursor: pointer;
-    color: var(--ink-faint);
+    color: var(--dark-ink-faint);
     font-family: inherit;
     font-size: inherit;
+    transition: color var(--transition-fast);
+}
+
+.lang-toggle button:hover {
+    color: var(--dark-ink-secondary);
 }
 
 .lang-toggle button.active {
-    color: var(--ink);
+    color: var(--dark-ink);
 }
 
 .lang-toggle span {
-    color: #C6C6C0;
+    color: rgba(255, 255, 255, 0.24);
 }
 
 .nav__cta {
@@ -139,113 +116,7 @@
     box-shadow: 0 8px 20px rgba(29, 78, 216, 0.4);
 }
 
-.nav__toggle {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    margin-left: 4px;
-}
-
-.nav__toggle svg {
-    width: 22px;
-    height: 22px;
-    stroke: var(--ink);
-}
-
-.nav__backdrop {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(12, 16, 23, 0.4);
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.nav__backdrop.active {
-    display: block;
-    opacity: 1;
-}
-
-/* Mobile Menu */
-.nav__mobile {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 80%;
-    max-width: 320px;
-    height: 100vh;
-    height: 100dvh;
-    background: var(--bg);
-    padding: 32px 32px 40px;
-    border-left: 1px solid var(--border);
-    z-index: 1001;
-    transform: translateX(100%);
-    transition: transform 0.3s ease, visibility 0.3s ease;
-    visibility: hidden;
-}
-
-.nav__mobile.active {
-    transform: translateX(0);
-    visibility: visible;
-}
-
-.nav__mobile-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-}
-
-.nav__mobile-close svg {
-    width: 22px;
-    height: 22px;
-    stroke: var(--ink);
-}
-
-.nav__mobile-menu {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    margin-top: 56px;
-}
-
-.nav__mobile-menu .nav__link {
-    font-size: 1.25rem;
-    display: block;
-}
-
-.nav__mobile-controls {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-}
-
-@media (min-width: 769px) {
-    .nav__toggle,
-    .nav__backdrop,
-    .nav__mobile {
-        display: none !important;
-    }
-}
-
 @media (max-width: 768px) {
-    .nav__menu {
-        display: none;
-    }
-    .nav__toggle {
-        display: flex;
-    }
     .nav__controls {
         gap: 12px;
     }
@@ -261,12 +132,19 @@
 }
 
 .footer__top {
-    padding: 56px 0;
+    padding: 56px 0 32px;
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
+    gap: 40px;
+}
+
+.footer__identity {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
 }
 
 .footer__brand {
@@ -277,11 +155,7 @@
 }
 
 .footer__brand .nav__logo-mark {
-    background: var(--dark-ink);
-}
-
-.footer__brand .nav__logo-mark span {
-    background: var(--dark-bg);
+    width: 32px;
 }
 
 .footer__brand-text {
@@ -293,29 +167,41 @@
 
 .footer__nav {
     display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    font-size: 15px;
+    flex-direction: column;
+    gap: 12px;
+    /* Column sizes to its widest link, so rag the shorter labels right
+       to keep them flush with the container edge */
+    text-align: right;
 }
 
 .footer__nav a {
+    font-size: 15px;
     color: var(--dark-ink-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
 }
 
 .footer__nav a:hover {
-    color: #FFFFFF;
+    color: var(--dark-ink);
+}
+
+/* Matches the nav links so the two footer columns share one type scale */
+.footer__email {
+    font-size: 15px;
+    color: var(--dark-ink-secondary);
 }
 
 .footer__bottom {
     padding: 24px 0 56px;
     border-top: 1px solid var(--dark-border);
-    margin-top: -8px;
-    font-size: 13px;
-    color: var(--dark-ink-faint);
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-between;
+    gap: 8px 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 13px;
+    color: var(--dark-ink-faint);
 }
 
 @media (max-width: 760px) {

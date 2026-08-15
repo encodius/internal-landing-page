@@ -20,7 +20,7 @@ document.documentElement.classList.add('js');
 document.addEventListener('DOMContentLoaded', () => {
     initFooter();
     initSmoothScroll();
-    initMobileNav();
+    initScrollTopTrigger();
     initHeaderScrollState();
     initContactForm();
     initHowItWorks();
@@ -139,6 +139,22 @@ function initFooter() {
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
+}
+
+// ============================================
+// SCROLL TO TOP (header logo)
+// ============================================
+function initScrollTopTrigger() {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    document.querySelectorAll('[data-scroll-top]').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: reduceMotion.matches ? 'auto' : 'smooth'
+            });
+        });
+    });
 }
 
 // ============================================
