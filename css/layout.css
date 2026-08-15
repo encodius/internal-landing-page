@@ -120,6 +120,12 @@
     .nav__controls {
         gap: 12px;
     }
+    /* The CTA overflows the 68px bar once the viewport is narrow. Dropped
+       until there is a mobile menu to hold it — the hero still carries a
+       "Request a demo" button, so the action is not lost. */
+    .nav__cta {
+        display: none;
+    }
 }
 
 /* ============================================
