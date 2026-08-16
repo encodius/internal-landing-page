@@ -205,7 +205,6 @@ const translations = {
         'services.cta.title': "Let's talk about the work.",
         'services.cta.lead': 'Tell us the shape of the problem and who is already on it.',
         'privacy.s8.p1': 'If we change how we handle personal data, we will update this page and move the date at the top. Material changes will be described here rather than made quietly.',
-        'home.contact.form.consent': "We use your message only to reply to you. See our privacy policy.",
 
         'home.contact.eyebrow': 'Contact',
         'home.contact.title': "Let's talk.",
@@ -461,7 +460,6 @@ const translations = {
         'services.cta.title': 'Hajde da popričamo o poslu.',
         'services.cta.lead': 'Opišite nam kakav je problem i ko na njemu već radi.',
         'privacy.s8.p1': 'Ako promenimo način na koji postupamo sa podacima o ličnosti, ažuriraćemo ovu stranicu i pomeriti datum na vrhu. Značajne izmene biće ovde i opisane, a ne sprovedene prećutno.',
-        'home.contact.form.consent': 'Vašu poruku koristimo isključivo da vam odgovorimo. Pogledajte politiku privatnosti.',
 
         'home.contact.eyebrow': 'Kontakt',
         'home.contact.title': 'Javite nam se.',

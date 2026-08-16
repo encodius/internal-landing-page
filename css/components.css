@@ -340,12 +340,3 @@
     }
 }
 
-/* Sits under the contact form's submit button — tells people where their
-   message goes, at the point where it actually matters */
-.form-consent {
-    margin-top: 12px;
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--ink-faint);
-    text-align: center;
-}
