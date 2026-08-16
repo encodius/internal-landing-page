@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encodius | Correlis — Fraud Case Management, Built by Fintech Engineers</title>
+    <title>Encodius | Correlis - Fraud Case Management, Built by Fintech Engineers</title>
     <meta name="description" content="Correlis is fraud case management for banks, insurers and gaming operators. Intake, investigation, legal deadlines, correspondence and a ten-year audit trail in one system.">
 
     <link rel="canonical" href="https://encodius.com/">
@@ -11,23 +11,31 @@
     <link rel="alternate" hreflang="sr" href="https://encodius.com/">
     <link rel="alternate" hreflang="x-default" href="https://encodius.com/">
 
+    <script>
+        if ((window.location.protocol === 'http:' || window.location.protocol === 'https:')
+            && window.location.pathname.endsWith('/index.html')) {
+            const cleanPath = window.location.pathname.slice(0, -'index.html'.length);
+            window.location.replace(cleanPath + window.location.search + window.location.hash);
+        }
+    </script>
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://encodius.com/">
-    <meta property="og:title" content="Encodius | Correlis — Fraud Case Management, Built by Fintech Engineers">
-    <meta property="og:description" content="Intake, investigation, legal deadlines and a ten-year audit trail in one system — for banks, insurers and gaming operators.">
+    <meta property="og:title" content="Encodius | Correlis - Fraud Case Management, Built by Fintech Engineers">
+    <meta property="og:description" content="Intake, investigation, legal deadlines and a ten-year audit trail in one system - for banks, insurers and gaming operators.">
     <meta property="og:image" content="https://encodius.com/assets/images/og-image.png?v=3">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Correlis by Encodius — fraud case management">
+    <meta property="og:image:alt" content="Correlis by Encodius - fraud case management">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="sr_RS">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://encodius.com/">
-    <meta name="twitter:title" content="Encodius | Correlis — Fraud Case Management, Built by Fintech Engineers">
-    <meta name="twitter:description" content="Intake, investigation, legal deadlines and a ten-year audit trail in one system — for banks, insurers and gaming operators.">
+    <meta name="twitter:title" content="Encodius | Correlis - Fraud Case Management, Built by Fintech Engineers">
+    <meta name="twitter:description" content="Intake, investigation, legal deadlines and a ten-year audit trail in one system - for banks, insurers and gaming operators.">
     <meta name="twitter:image" content="https://encodius.com/assets/images/og-image.png?v=3">
-    <meta name="twitter:image:alt" content="Correlis by Encodius — fraud case management">
+    <meta name="twitter:image:alt" content="Correlis by Encodius - fraud case management">
 
     <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
@@ -77,11 +85,11 @@
                 <span class="nav__logo-text">Encodius</span>
             </button>
             <div class="nav__links" id="site-menu">
-                <a href="product.html" data-i18n="nav.product">Product</a>
-                <a href="services.html" data-i18n="nav.services">Services</a>
-                <a href="company.html" data-i18n="nav.company">Company</a>
-                <a href="contact.html" data-i18n="nav.contact">Contact</a>
-                <a href="contact.html#form" class="nav__mobile-cta" data-i18n="nav.ctaDemo" hidden>Request a demo</a>
+                <a href="/product/" data-i18n="nav.product">Product</a>
+                <a href="/services/" data-i18n="nav.services">Services</a>
+                <a href="/company/" data-i18n="nav.company">Company</a>
+                <a href="/contact/" data-i18n="nav.contact">Contact</a>
+                <a href="/contact/#form" class="nav__mobile-cta" data-i18n="nav.ctaDemo" hidden>Request a demo</a>
             </div>
             <div class="nav__controls">
                 <div class="lang-toggle">
@@ -89,7 +97,7 @@
                     <span>/</span>
                     <button type="button" data-lang-btn="sr">SR</button>
                 </div>
-                <a href="contact.html#form" class="nav__cta" data-i18n="nav.ctaDemo">Request a demo</a>
+                <a href="/contact/#form" class="nav__cta" data-i18n="nav.ctaDemo">Request a demo</a>
                 <button type="button" class="nav__menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu" data-i18n-aria-label="nav.menuOpen" hidden>
                     <img class="nav__menu-icon nav__menu-icon--open" src="assets/icons/hamburger.svg" alt="" width="24" height="24">
                     <img class="nav__menu-icon nav__menu-icon--close" src="assets/icons/close.svg" alt="" width="24" height="24">
@@ -153,7 +161,7 @@
                 <h1><span data-i18n="home.hero.titleLead">Every fraud case, from the first alert to the </span><span class="hero__title-accent" data-i18n="home.hero.titleAccent">filed report</span><span data-i18n="home.hero.titleEnd">.</span></h1>
                 <p data-i18n="home.hero.desc">Correlis is case management for fraud teams at banks, insurers and gaming operators. Intake, investigation, legal deadlines, correspondence and a ten-year audit trail in one system.</p>
                 <div class="hero__actions">
-                    <a href="contact.html#form" class="btn btn--primary" data-i18n="nav.ctaDemo">Request a demo</a>
+                    <a href="/contact/#form" class="btn btn--primary" data-i18n="nav.ctaDemo">Request a demo</a>
                 </div>
             </div>
 
@@ -233,7 +241,7 @@
             <div class="eyebrow" data-i18n="home.eng.eyebrow">Engineering services</div>
             <div class="split" style="gap:56px;align-items:end;margin-top:20px;">
                 <h2 class="section-title" data-i18n="home.eng.title">We also build software for other teams.</h2>
-                <p style="color:var(--dark-ink-secondary);font-size:17px;max-width:48ch;" data-i18n="home.eng.lead">Correlis is our own product. Alongside it, we take on engineering work for other companies — whole projects delivered end to end, engineers embedded in your existing team, or a single specialist role you need filled.</p>
+                <p style="color:var(--dark-ink-secondary);font-size:17px;max-width:48ch;" data-i18n="home.eng.lead">Correlis is our own product. Alongside it, we take on engineering work for other companies - whole projects delivered end to end, engineers embedded in your existing team, or a single specialist role you need filled.</p>
             </div>
 
             <div class="card-grid card-grid--3" style="margin-top:56px;" data-reveal>
@@ -251,7 +259,7 @@
                 </div>
             </div>
             <div style="margin-top:36px;">
-                <a href="services.html" class="btn btn--ghost-dark" data-i18n="nav.seeServices">See services</a>
+                <a href="/services/" class="btn btn--ghost-dark" data-i18n="nav.seeServices">See services</a>
             </div>
         </div>
     </section>
@@ -262,7 +270,7 @@
         <h2 class="section-title" data-i18n="home.contact.title">Let's talk.</h2>
         <p data-i18n="home.contact.lead">A demo of Correlis takes half an hour. For engineering work, tell us the shape of the problem and who is already on it.</p>
         <div class="home-contact-cta__actions">
-            <a href="contact.html#form" class="btn btn--primary" data-i18n="home.eng.cta">Talk to us</a>
+            <a href="/contact/#form" class="btn btn--primary" data-i18n="home.eng.cta">Talk to us</a>
         </div>
     </section>
 
@@ -282,17 +290,17 @@
                     <div class="footer__heading" data-i18n="footer.h.overview">Overview</div>
                     <a href="#built-for" data-i18n="home.builtfor.eyebrow">Built for</a>
                     <a href="#how" data-i18n="home.how.eyebrow">How it works</a>
-                    <a href="services.html" data-i18n="footer.engineering">Engineering</a>
-                    <a href="contact.html" data-i18n="footer.letsTalk">Let's talk</a>
+                    <a href="/services/" data-i18n="footer.engineering">Engineering</a>
+                    <a href="/contact/" data-i18n="footer.letsTalk">Let's talk</a>
                 </nav>
 
                 <nav class="footer__col" aria-label="Pages">
                     <div class="footer__heading" data-i18n="footer.h.pages">Pages</div>
-                    <a href="product.html" data-i18n="nav.product">Product</a>
-                    <a href="services.html" data-i18n="nav.services">Services</a>
-                    <a href="company.html" data-i18n="nav.company">Company</a>
-                    <a href="contact.html" data-i18n="nav.contact">Contact</a>
-                    <a href="terms.html" data-i18n="nav.terms">Terms</a>
+                    <a href="/product/" data-i18n="nav.product">Product</a>
+                    <a href="/services/" data-i18n="nav.services">Services</a>
+                    <a href="/company/" data-i18n="nav.company">Company</a>
+                    <a href="/contact/" data-i18n="nav.contact">Contact</a>
+                    <a href="/terms/" data-i18n="nav.terms">Terms</a>
                 </nav>
 
                 <div class="footer__col footer__col--end">
@@ -306,9 +314,9 @@
         </div>
     </footer>
 
-    <script defer src="js/translations.js?v=20260816-2"></script>
+    <script defer src="js/translations.js?v=20260816-3"></script>
     <script defer src="js/animations.js?v=20260816-1"></script>
     <script defer src="js/interactions.js?v=20260816-1"></script>
-    <script defer src="js/app.js?v=20260816-1"></script>
+    <script defer src="js/app.js?v=20260816-2"></script>
 </body>
 </html>

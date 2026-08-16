@@ -6,6 +6,14 @@
 // Mark JS as available so CSS can hide [data-reveal] only when it will actually be revealed
 document.documentElement.classList.add('js');
 
+// Direct file previews do not have a web server to resolve root-relative routes.
+// Derive the project root from this script so those links can point to the
+// corresponding local index files without changing production URLs.
+const filePreviewRoot = (() => {
+    if (window.location.protocol !== 'file:' || !document.currentScript?.src) return null;
+    return new URL('../', document.currentScript.src);
+})();
+
 // ============================================
 // LANGUAGE - Initialize before DOM to prevent flash
 // ============================================
@@ -18,6 +26,7 @@ document.documentElement.classList.add('js');
 // INITIALIZATION
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
+    initFilePreviewLinks();
     initFooter();
     initSmoothScroll();
     initScrollTopTrigger();
@@ -28,6 +37,27 @@ document.addEventListener('DOMContentLoaded', () => {
     initLanguage();
     initScrollReveal();
 });
+
+// ============================================
+// LOCAL FILE PREVIEW
+// ============================================
+function initFilePreviewLinks() {
+    if (!filePreviewRoot) return;
+
+    document.querySelectorAll('a[href^="/"]').forEach(link => {
+        const publicUrl = new URL(link.getAttribute('href'), 'https://encodius.com');
+        let localPath = publicUrl.pathname.replace(/^\/+/, '');
+
+        if (!localPath || localPath.endsWith('/')) {
+            localPath += 'index.html';
+        }
+
+        const localUrl = new URL(localPath, filePreviewRoot);
+        localUrl.search = publicUrl.search;
+        localUrl.hash = publicUrl.hash;
+        link.href = localUrl.href;
+    });
+}
 
 // ============================================
 // LANGUAGE TOGGLE (EN / SR)
