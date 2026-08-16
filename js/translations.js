@@ -23,6 +23,8 @@ const translations = {
         'footer.h.overview': 'Overview',
         'footer.h.pages': 'Pages',
         'footer.h.contact': 'Get in touch',
+        'footer.engineering': 'Engineering',
+        'footer.letsTalk': "Let's talk",
 
         // Page titles
         'title.home': 'Encodius | Correlis — Fraud Case Management, Built by Fintech Engineers',
@@ -292,6 +294,8 @@ const translations = {
         'footer.h.overview': 'Pregled',
         'footer.h.pages': 'Stranice',
         'footer.h.contact': 'Kontakt',
+        'footer.engineering': 'Inženjering',
+        'footer.letsTalk': 'Javite nam se',
 
         'title.home': 'Encodius | Correlis — vođenje predmeta prevara, razvili inženjeri iz fintecha',
         'title.product': 'Correlis — softver za vođenje predmeta prevara | Encodius',
