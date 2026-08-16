@@ -59,6 +59,24 @@
     letter-spacing: -0.02em;
 }
 
+.nav__links {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+}
+
+.nav__links a {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--dark-ink-secondary);
+    white-space: nowrap;
+}
+
+.nav__links a:hover,
+.nav__links a.is-active {
+    color: var(--dark-ink);
+}
+
 .nav__controls {
     margin-left: auto;
     display: flex;
@@ -100,6 +118,8 @@
 }
 
 .nav__cta {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(135deg, #2F6FED, #1D4ED8);
     color: #FFFFFF;
     padding: 10px 20px;
@@ -116,9 +136,57 @@
     box-shadow: 0 8px 20px rgba(29, 78, 216, 0.4);
 }
 
+/* Idle light wave — a broad, soft swell that travels through the pill and
+   then rests, rather than anything crossing its edge (a ring leaving the
+   shape reads as a notification badge no matter how faint it is).
+
+   The band is deliberately wide and feathered across ~60% of the gradient
+   so it lands as a swell of light rather than a hard "shine" streak, and
+   it is allowed to pass over the label too — light moving across a real
+   surface does not stop at the text, and at this opacity the label only
+   brightens a touch as it goes by.
+
+   `overflow: hidden` on the anchor clips the wave to the pill radius; an
+   element's own box-shadow is never clipped by its overflow, so the
+   elevation and hover lift are unaffected. */
+.nav__cta::before {
+    content: '';
+    position: absolute;
+    /* Slight bleed so the feathered edge reaches the rounded corners */
+    inset: -1px;
+    pointer-events: none;
+    background: linear-gradient(105deg,
+        rgba(255, 255, 255, 0)    20%,
+        rgba(255, 255, 255, 0.16) 45%,
+        rgba(255, 255, 255, 0.16) 55%,
+        rgba(255, 255, 255, 0)    80%);
+    background-size: 250% 100%;
+    background-repeat: no-repeat;
+    animation: ctaWave 7s cubic-bezier(0.4, 0, 0.3, 1) infinite;
+}
+
+/* Travels across in the first ~42%, then waits off-canvas for the rest of
+   the cycle, so the button stays calm between passes */
+@keyframes ctaWave {
+    0%        { background-position: 170% 0; }
+    42%, 100% { background-position: -70% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav__cta::before {
+        animation: none;
+        opacity: 0;
+    }
+}
+
 @media (max-width: 768px) {
     .nav__controls {
         gap: 12px;
+    }
+    /* Same reasoning as the CTA below — no room in the 68px bar until
+       there is a mobile menu. The footer still carries every link. */
+    .nav__links {
+        display: none;
     }
     /* The CTA overflows the 68px bar once the viewport is narrow. Dropped
        until there is a mobile menu to hold it — the hero still carries a
@@ -138,19 +206,58 @@
 }
 
 .footer__top {
-    padding: 56px 0 32px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 40px;
+    padding: 56px 0 40px;
+    display: grid;
+    /* The first three tracks size to their own content so they sit together
+       on the left at a fixed gap. The fourth soaks up all remaining width,
+       which pins "Get in touch" to the right edge — fr tracks on the first
+       three would spread them evenly across the footer instead. */
+    grid-template-columns: auto auto auto 1fr;
+    column-gap: 56px;
+    row-gap: 40px;
+    align-items: start;
 }
 
-.footer__identity {
+.footer__col {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 13px;
+}
+
+.footer__col--end {
+    justify-self: end;
+    align-items: flex-end;
+    text-align: right;
+}
+
+/* The 32px logo makes this row 33px tall, and the wordmark is centred
+   against it — so "Encodius" lands ~9px below the baseline of the column
+   headings next to it, which sit at the top of an 18px line box. Pull the
+   column up by that difference so the wordmark reads as being on the same
+   line. Revisit if the logo size or the heading/wordmark type sizes change. */
+.footer__col--brand {
+    margin-top: -9px;
+}
+
+.footer__heading {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dark-ink-faint);
+    margin-bottom: 3px;
+}
+
+.footer__col a {
+    font-size: 15px;
+    color: var(--dark-ink-secondary);
+    transition: color var(--transition-fast);
+}
+
+.footer__col a:hover {
+    color: var(--dark-ink);
 }
 
 .footer__brand {
@@ -171,27 +278,7 @@
     letter-spacing: -0.02em;
 }
 
-.footer__nav {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    /* Column sizes to its widest link, so rag the shorter labels right
-       to keep them flush with the container edge */
-    text-align: right;
-}
-
-.footer__nav a {
-    font-size: 15px;
-    color: var(--dark-ink-secondary);
-    text-decoration: none;
-    transition: color var(--transition-fast);
-}
-
-.footer__nav a:hover {
-    color: var(--dark-ink);
-}
-
-/* Matches the nav links so the two footer columns share one type scale */
+/* Matches the link columns so every footer column shares one type scale */
 .footer__email {
     font-size: 15px;
     color: var(--dark-ink-secondary);
@@ -210,8 +297,29 @@
     color: var(--dark-ink-faint);
 }
 
+@media (max-width: 900px) {
+    /* Four tracks stop fitting — pair them up and let the contact column
+       fall back into the normal left-aligned flow */
+    .footer__top {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 40px;
+    }
+    .footer__col--end {
+        justify-self: start;
+        align-items: flex-start;
+        text-align: left;
+    }
+}
+
 @media (max-width: 760px) {
     .footer__top {
         padding: 48px 0 32px;
+    }
+}
+
+@media (max-width: 520px) {
+    .footer__top {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 32px;
     }
 }

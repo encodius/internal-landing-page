@@ -15,7 +15,7 @@
     <meta property="og:url" content="https://encodius.com/">
     <meta property="og:title" content="Encodius | Correlis — Fraud Case Management, Built by Fintech Engineers">
     <meta property="og:description" content="Intake, investigation, legal deadlines and a ten-year audit trail in one system — for banks, insurers and gaming operators.">
-    <meta property="og:image" content="https://encodius.com/assets/images/og-image.png?v=2">
+    <meta property="og:image" content="https://encodius.com/assets/images/og-image.png?v=3">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Correlis by Encodius — fraud case management">
@@ -26,18 +26,16 @@
     <meta name="twitter:url" content="https://encodius.com/">
     <meta name="twitter:title" content="Encodius | Correlis — Fraud Case Management, Built by Fintech Engineers">
     <meta name="twitter:description" content="Intake, investigation, legal deadlines and a ten-year audit trail in one system — for banks, insurers and gaming operators.">
-    <meta name="twitter:image" content="https://encodius.com/assets/images/og-image.png?v=2">
+    <meta name="twitter:image" content="https://encodius.com/assets/images/og-image.png?v=3">
     <meta name="twitter:image:alt" content="Correlis by Encodius — fraud case management">
 
     <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Manrope:wght@500;700;800&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-latin.woff2" crossorigin>
 
+    <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
@@ -75,9 +73,14 @@
     <header class="header" id="header">
         <nav class="nav container">
             <button type="button" class="nav__logo" data-scroll-top>
-                <img class="nav__logo-mark" src="assets/icons/logo-mark.png" alt="" width="143" height="96">
+                <img class="nav__logo-mark" src="assets/icons/logo-mark.png" alt="" width="262" height="272">
                 <span class="nav__logo-text">Encodius</span>
             </button>
+            <div class="nav__links">
+                <a href="product.html" data-i18n="nav.product">Product</a>
+                <a href="services.html" data-i18n="nav.services">Services</a>
+                <a href="company.html" data-i18n="nav.company">Company</a>
+            </div>
             <div class="nav__controls">
                 <div class="lang-toggle">
                     <button type="button" data-lang-btn="en">EN</button>
@@ -141,28 +144,23 @@
 
         <div class="hero__content">
             <div class="hero__inner" data-reveal>
-                <span class="tag" data-i18n="home.hero.eyebrow">Correlis — fraud case management</span>
                 <h1><span data-i18n="home.hero.titleLead">Every fraud case, from the first alert to the </span><span class="hero__title-accent" data-i18n="home.hero.titleAccent">filed report</span><span data-i18n="home.hero.titleEnd">.</span></h1>
                 <p data-i18n="home.hero.desc">Correlis is case management for fraud teams at banks, insurers and gaming operators. Intake, investigation, legal deadlines, correspondence and a ten-year audit trail in one system.</p>
                 <div class="hero__actions">
                     <a href="#contact" class="btn btn--primary" data-i18n="nav.ctaDemo">Request a demo</a>
                 </div>
-                <div class="status-line">
-                    <span class="status-dot"></span>
-                    <span data-i18n="home.hero.status">In pilot with a European bank's fraud operations team.</span>
-                </div>
             </div>
 
             <div class="hero__media" data-reveal data-reveal-delay="120">
                 <div class="frame hero__media__inner">
-                    <img src="assets/images/correlis/corellis-hero.png" alt="Correlis dashboard: active cases ordered by deadline" width="1992" height="1395" loading="eager">
+                    <img src="assets/images/mocks/fcm-case-details-part1.png" alt="Correlis case record: deadline countdowns, the money trail and the next action to take" width="3200" height="2500" loading="eager">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Built for -->
-    <section class="page-section">
+    <section class="page-section" id="built-for" style="scroll-margin-top:96px;">
         <div class="eyebrow" data-i18n="home.builtfor.eyebrow">Built for</div>
         <div class="card-grid card-grid--4" style="margin-top:40px;" data-reveal>
             <div class="card">
@@ -193,10 +191,10 @@
         </div>
 
         <div class="how-media" data-reveal>
-            <img class="is-active" data-how-image="0" src="assets/images/correlis/corellis-intake.png" alt="Intake">
-            <img data-how-image="1" src="assets/images/correlis/corellis-case-detail.png" alt="Investigation">
-            <img data-how-image="2" src="assets/images/correlis/corellis-activity-log.png" alt="Deadlines &amp; audit">
-            <img data-how-image="3" src="assets/images/correlis/corellis-analytics.png" alt="Reporting">
+            <img class="is-active" data-how-image="0" src="assets/images/mocks/resized/fcm-wizard-step1-3200x1960.png" alt="Intake" width="3200" height="1960">
+            <img data-how-image="1" src="assets/images/mocks/resized/fcm-wizard-step3-3200x1960.png" alt="Investigation" width="3200" height="1960">
+            <img data-how-image="2" src="assets/images/mocks/fcm-dashboard-mock.png" alt="Deadlines &amp; audit" width="3200" height="1960">
+            <img data-how-image="3" src="assets/images/mocks/resized/fcm-analytics-3200x1960.png" alt="Reporting" width="3200" height="1960">
         </div>
 
         <div class="how-steps">
@@ -234,56 +232,20 @@
 
             <div class="card-grid card-grid--3" style="margin-top:56px;" data-reveal>
                 <div class="card">
-                    <h3 data-i18n="home.eng.t1.title">Product engineering</h3>
-                    <p data-i18n="home.eng.t1.text">Web and mobile products built end to end, from first prototype to production.</p>
+                    <h3 data-i18n="home.eng.p1.title">Build</h3>
+                    <p data-i18n="home.eng.p1.text">New products from first prototype to production, and older systems moved forward without a rewrite that stops everything else.</p>
                 </div>
                 <div class="card">
-                    <h3 data-i18n="home.eng.t2.title">Platform and infrastructure</h3>
-                    <p data-i18n="home.eng.t2.text">The systems, pipelines and operational tooling that keep software reliable at scale.</p>
+                    <h3 data-i18n="home.eng.p2.title">Run</h3>
+                    <p data-i18n="home.eng.p2.text">The platforms, pipelines and data flows that decide whether software is reliable on a bad day, not just a good one.</p>
                 </div>
                 <div class="card">
-                    <h3 data-i18n="home.eng.t3.title">Data and automation</h3>
-                    <p data-i18n="home.eng.t3.text">Reporting, integrations and AI-assisted features with a human in the loop.</p>
-                </div>
-                <div class="card">
-                    <h3 data-i18n="home.eng.t4.title">Quality assurance</h3>
-                    <p data-i18n="home.eng.t4.text">Test strategy, automated suites and release checks that catch regressions before your users do.</p>
-                </div>
-                <div class="card">
-                    <h3 data-i18n="home.eng.t5.title">Security and penetration testing</h3>
-                    <p data-i18n="home.eng.t5.text">Penetration testing, code and infrastructure review, and remediation guidance mapped to the standards you report against.</p>
-                </div>
-                <div class="card">
-                    <h3 data-i18n="home.eng.t6.title">Legacy modernisation</h3>
-                    <p data-i18n="home.eng.t6.text">Moving systems off ageing stacks incrementally, without a rewrite that stops everything else.</p>
+                    <h3 data-i18n="home.eng.p3.title">Assure</h3>
+                    <p data-i18n="home.eng.p3.text">The testing and security work that finds problems before your users, your auditors or an attacker do.</p>
                 </div>
             </div>
             <div style="margin-top:36px;">
-                <a href="#contact" class="btn btn--ghost-dark" data-i18n="home.eng.cta">Talk to us</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Company -->
-    <section class="page-section" id="company" style="scroll-margin-top:96px;">
-        <div class="eyebrow" data-i18n="home.company.eyebrow">Company</div>
-        <h2 class="section-title" style="margin-top:20px;max-width:24ch;" data-i18n="home.company.title">Two founders, one engineering bench.</h2>
-        <p class="company__intro" data-i18n="home.company.lead">Encodius is a Serbian software company. Our engineers bring years of experience on demanding, large-scale software projects.</p>
-
-        <div class="grid grid--2 company__team" data-reveal>
-            <div class="team-member">
-                <div class="team-member__photo">
-                    <img src="assets/images/team/nemanja.png" alt="Nemanja, Co-founder and CEO" loading="lazy">
-                </div>
-                <div class="team-member__name" data-i18n="home.company.ceoName">Nemanja</div>
-                <div class="team-member__role" data-i18n="home.company.ceoRole">Co-founder, CEO</div>
-            </div>
-            <div class="team-member">
-                <div class="team-member__photo">
-                    <img src="assets/images/team/dusan.jpeg" alt="Dušan, Co-founder and CTO" loading="lazy">
-                </div>
-                <div class="team-member__name" data-i18n="home.company.ctoName">Dušan</div>
-                <div class="team-member__role" data-i18n="home.company.ctoRole">Co-founder, CTO</div>
+                <a href="services.html" class="btn btn--ghost-dark" data-i18n="nav.seeServices">See services</a>
             </div>
         </div>
     </section>
@@ -322,6 +284,7 @@
                         <button type="submit" class="btn btn--primary btn--full">
                             <span data-i18n="home.contact.form.submit">Send message</span>
                         </button>
+                        <p class="form-consent"><span data-i18n="home.contact.form.consent">We use your message only to reply to you. See our privacy policy.</span> <a href="terms.html" data-i18n="nav.terms">Terms</a></p>
                     </div>
                 </form>
                 <div class="form-status" id="form-status"></div>
@@ -332,23 +295,38 @@
     </main>
 
     <footer class="footer">
-        <div class="container footer__top">
-            <div class="footer__identity">
-                <div class="footer__brand">
-                    <img class="nav__logo-mark" src="assets/icons/logo-mark.png" alt="" width="143" height="96">
-                    <span class="footer__brand-text">Encodius</span>
+        <div class="container">
+            <div class="footer__top">
+                <div class="footer__col footer__col--brand">
+                    <div class="footer__brand">
+                        <img class="nav__logo-mark" src="assets/icons/logo-mark.png" alt="" width="262" height="272">
+                        <span class="footer__brand-text">Encodius</span>
+                    </div>
                 </div>
-                <span class="footer__email">office@encodius.com</span>
+
+                <nav class="footer__col" aria-label="Home sections">
+                    <div class="footer__heading" data-i18n="footer.h.overview">Overview</div>
+                    <a href="#built-for" data-i18n="home.builtfor.eyebrow">Built for</a>
+                    <a href="#how" data-i18n="home.how.eyebrow">How it works</a>
+                    <a href="#contact" data-i18n="home.contact.eyebrow">Contact</a>
+                </nav>
+
+                <nav class="footer__col" aria-label="Pages">
+                    <div class="footer__heading" data-i18n="footer.h.pages">Pages</div>
+                    <a href="product.html" data-i18n="nav.product">Product</a>
+                    <a href="services.html" data-i18n="nav.services">Services</a>
+                    <a href="company.html" data-i18n="nav.company">Company</a>
+                    <a href="terms.html" data-i18n="nav.terms">Terms</a>
+                </nav>
+
+                <div class="footer__col footer__col--end">
+                    <div class="footer__heading" data-i18n="footer.h.contact">Get in touch</div>
+                    <a class="footer__email" href="mailto:office@encodius.com">office@encodius.com</a>
+                </div>
             </div>
-            <nav class="footer__nav" aria-label="Footer">
-                <a href="#how" data-i18n="home.how.eyebrow">How it works</a>
-                <a href="#services" data-i18n="home.eng.eyebrow">Engineering services</a>
-                <a href="#company" data-i18n="home.company.eyebrow">Company</a>
-                <a href="#contact" data-i18n="home.contact.eyebrow">Contact</a>
-            </nav>
-        </div>
-        <div class="container footer__bottom">
-            <span data-i18n="footer.copyright">© 2026 Encodius. All rights reserved.</span>
+            <div class="footer__bottom">
+                <span data-i18n="footer.copyright">© 2026 Encodius. All rights reserved.</span>
+            </div>
         </div>
     </footer>
 

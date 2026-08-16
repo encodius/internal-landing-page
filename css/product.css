@@ -1,0 +1,294 @@
+/* ============================================
+   ENCODIUS - Product Page (Correlis)
+   Hero variant, feature bands, screenshot figures
+   ============================================ */
+
+/* ============================================
+   HERO
+   The whole dashboard story lives here — pitch, then the
+   Dashboard headline, then the shot. The intro text is kept
+   deliberately tight so the screenshot arrives early.
+   ============================================ */
+.hero--product {
+    padding-bottom: 88px;
+}
+
+.hero--product .hero__inner {
+    max-width: 800px;
+}
+
+.hero--product h1 {
+    font-size: clamp(46px, 5.6vw, 76px);
+    line-height: 1;
+}
+
+/* Beats `.hero p`, which would otherwise win on specificity */
+.hero--product .hero__subtitle {
+    margin-top: 18px;
+    max-width: 22ch;
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.6vw, 32px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    /* Same treatment as the home hero's accent phrase */
+    background: linear-gradient(90deg, #5B8DEF, #8AB4F8, #5B8DEF);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientShift 6s linear infinite;
+}
+
+.hero--product .hero__desc {
+    margin-top: 22px;
+    font-size: 18px;
+    max-width: 62ch;
+}
+
+.hero--product .hero__actions {
+    margin-top: 32px;
+}
+
+/* --- Dashboard fold --- */
+.hero__dashboard {
+    position: relative;
+    z-index: 1;
+    margin-top: 88px;
+    scroll-margin-top: 80px;
+}
+
+.hero__dashboard-head {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.hero__dashboard .feature__split {
+    margin-top: 18px;
+}
+
+/* The section furniture is built for light bands — repaint it for the hero */
+.hero .eyebrow {
+    color: var(--dark-ink-muted);
+}
+
+.hero .section-title {
+    font-size: clamp(28px, 2.9vw, 40px);
+}
+
+.hero .section-lead {
+    color: var(--dark-ink-secondary);
+    font-size: 17px;
+    margin-top: 0;
+    max-width: 48ch;
+}
+
+/* Runs wider than the 1200px text column — same 1320px track as the
+   feature-band screenshots below. Frame treatment comes from `.hero .frame`. */
+.hero__shot {
+    max-width: 1320px;
+    margin: 48px auto 0;
+    padding: 0 32px;
+}
+
+.hero__shot .frame {
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hero__shot .frame:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 34px 90px rgba(47, 111, 237, 0.36);
+}
+
+.hero__shot-caption {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--dark-ink-faint);
+}
+
+/* In-page contents — the page is long, so give the reader a map */
+.hero__jump {
+    position: relative;
+    z-index: 1;
+    max-width: var(--container-width);
+    margin: 64px auto 0;
+    padding: 0 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.hero__jump a {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark-ink-secondary);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    transition: color var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.hero__jump a:hover {
+    color: var(--dark-ink);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero--product .hero__subtitle { animation: none; }
+}
+
+/* ============================================
+   FEATURE BANDS
+   Text sits in the 1200px container; the screenshots
+   run 120px wider so the dense UI stays legible.
+   ============================================ */
+.feature {
+    padding: 120px 0;
+    scroll-margin-top: 80px;
+}
+
+.feature--inset {
+    background: var(--bg-inset);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.feature__head {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.feature__split {
+    gap: 56px;
+    align-items: end;
+    margin-top: 20px;
+}
+
+.feature__media {
+    max-width: 1320px;
+    margin: 56px auto 0;
+    padding: 0 32px;
+}
+
+/* ============================================
+   SHOT — a framed product screenshot
+   ============================================ */
+.shot {
+    margin: 0;
+}
+
+.shot + .shot {
+    margin-top: 44px;
+}
+
+.shot__label {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 14px;
+}
+
+/* Deeper than the shared .frame shadow — these panels carry the page.
+   Lifts on hover like the hero shot, but with a neutral shadow: the
+   accent glow only reads against the dark hero, not on a light band. */
+.shot__frame {
+    box-shadow: 0 26px 64px rgba(10, 24, 50, 0.11);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.shot__frame:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 34px 80px rgba(10, 24, 50, 0.18);
+}
+
+.feature--inset .shot__frame {
+    border-color: var(--border-strong);
+}
+
+.shot__caption {
+    margin-top: 18px;
+    font-size: 14px;
+    color: var(--ink-muted);
+    text-align: center;
+}
+
+/* ============================================
+   CLOSING CTA
+   ============================================ */
+/* Light, not dark: a dark band here merged into the dark footer and read
+   as one shapeless mass. Inset + a hairline separates it from the white
+   band above while still contrasting against the footer below. */
+.product-cta {
+    background: var(--bg-inset);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 112px 32px;
+}
+
+.product-cta h2 {
+    max-width: 20ch;
+    margin: 0 auto;
+}
+
+.product-cta p {
+    color: var(--ink-secondary);
+    font-size: 18px;
+    margin-top: 18px;
+}
+
+.product-cta .btn {
+    margin-top: 36px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1100px) {
+    .feature {
+        padding: 96px 0;
+    }
+    .feature__media {
+        margin-top: 44px;
+    }
+    .hero__dashboard {
+        margin-top: 72px;
+    }
+    .hero__shot {
+        margin-top: 36px;
+    }
+}
+
+@media (max-width: 760px) {
+    .feature {
+        padding: 72px 0;
+    }
+    .feature__head,
+    .feature__media,
+    .hero__dashboard-head,
+    .hero__shot,
+    .hero__jump {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .hero--product {
+        padding-bottom: 72px;
+    }
+    .hero__dashboard {
+        margin-top: 56px;
+    }
+    .hero__jump {
+        margin-top: 48px;
+    }
+    .product-cta {
+        padding: 80px 20px;
+    }
+}

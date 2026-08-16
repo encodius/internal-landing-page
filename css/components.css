@@ -211,7 +211,10 @@
     border: 1px solid var(--border);
     box-shadow: 0 30px 70px rgba(10, 24, 50, 0.14);
     position: relative;
-    aspect-ratio: 16 / 9;
+    /* All four screenshots are exported at 3200x1960, so the window matches
+       them exactly: no letterboxing, no cropping, and the frame never
+       changes size between steps. Keep this in sync if the exports change. */
+    aspect-ratio: 80 / 49;
     background: var(--dark-bg);
 }
 
@@ -220,8 +223,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: top center;
+    object-fit: contain;
     opacity: 0;
     transition: opacity 1s ease;
 }
@@ -336,4 +338,14 @@
     .team-member__photo {
         aspect-ratio: 1;
     }
+}
+
+/* Sits under the contact form's submit button — tells people where their
+   message goes, at the point where it actually matters */
+.form-consent {
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-faint);
+    text-align: center;
 }

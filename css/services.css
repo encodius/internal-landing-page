@@ -1,0 +1,217 @@
+/* ============================================
+   ENCODIUS - Services Page
+   Hero, proof band, Build/Run/Assure pillars
+   ============================================ */
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero--services {
+    padding-bottom: 96px;
+}
+
+.hero--services .hero__inner {
+    max-width: 820px;
+}
+
+.hero--services h1 {
+    font-size: clamp(42px, 5.2vw, 72px);
+    line-height: 1.02;
+}
+
+/* Beats `.hero p`, which would otherwise win on specificity */
+.hero--services .hero__subtitle {
+    margin-top: 20px;
+    max-width: 26ch;
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.6vw, 32px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    background: linear-gradient(90deg, #5B8DEF, #8AB4F8, #5B8DEF);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientShift 6s linear infinite;
+}
+
+.hero--services .hero__desc {
+    margin-top: 24px;
+    font-size: 18px;
+    max-width: 64ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero--services .hero__subtitle { animation: none; }
+}
+
+/* ============================================
+   BANDS
+   ============================================ */
+.svc {
+    padding: 112px 0;
+    scroll-margin-top: 80px;
+}
+
+.svc--inset {
+    background: var(--bg-inset);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.svc__inner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.svc__split {
+    gap: 56px;
+    align-items: start;
+    margin-top: 20px;
+}
+
+.svc__body p + p {
+    margin-top: 16px;
+}
+
+.svc__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 28px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.svc__link::after {
+    content: '\2192';
+    transition: transform var(--transition-fast);
+}
+
+.svc__link:hover::after {
+    transform: translateX(4px);
+}
+
+/* ============================================
+   PILLARS — Build / Run / Assure
+   ============================================ */
+.pillars {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 56px;
+}
+
+.pillar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 32px 28px;
+}
+
+/* On the inset band the cards are white, so they need a firmer edge */
+.svc--inset .pillar {
+    border-color: var(--border-strong);
+}
+
+.pillar__name {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.pillar__lead {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-secondary);
+}
+
+.pillar__items {
+    margin-top: 28px;
+    display: grid;
+    gap: 20px;
+}
+
+/* Every item carries a rule, including the first — which also separates
+   the list from the pillar's lead paragraph above it */
+.pillar__item {
+    padding-top: 20px;
+    border-top: 1px solid var(--border-strong);
+}
+
+.pillar__item-title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.pillar__item-text {
+    margin-top: 7px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-muted);
+}
+
+/* ============================================
+   CLOSING CTA
+   ============================================ */
+.svc-cta {
+    background: var(--bg-inset);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 112px 32px;
+}
+
+.svc-cta h2 {
+    max-width: 20ch;
+    margin: 0 auto;
+}
+
+.svc-cta p {
+    color: var(--ink-secondary);
+    font-size: 18px;
+    margin-top: 18px;
+    max-width: 46ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.svc-cta .btn {
+    margin-top: 36px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1100px) {
+    .svc {
+        padding: 88px 0;
+    }
+    .pillars {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 760px) {
+    .hero--services {
+        padding-bottom: 64px;
+    }
+    .svc {
+        padding: 64px 0;
+    }
+    .svc__inner {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .svc-cta {
+        padding: 80px 20px;
+    }
+}
