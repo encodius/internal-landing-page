@@ -107,6 +107,7 @@ function initMobileNavigation() {
     if (!header || !toggle || !menu) return;
 
     const desktopQuery = window.matchMedia('(min-width: 769px)');
+    const mobileCta = menu.querySelector('.nav__mobile-cta');
 
     function setOpen(isOpen, returnFocus = false) {
         header.classList.toggle('menu-open', isOpen);
@@ -142,14 +143,19 @@ function initMobileNavigation() {
         }
     });
 
-    const closeAtDesktop = (event) => {
-        if (event.matches) setOpen(false);
+    const syncViewport = (event) => {
+        const isDesktop = event.matches;
+        toggle.hidden = isDesktop;
+        if (mobileCta) mobileCta.hidden = isDesktop;
+        if (isDesktop) setOpen(false);
     };
 
+    syncViewport(desktopQuery);
+
     if (desktopQuery.addEventListener) {
-        desktopQuery.addEventListener('change', closeAtDesktop);
+        desktopQuery.addEventListener('change', syncViewport);
     } else {
-        desktopQuery.addListener(closeAtDesktop);
+        desktopQuery.addListener(syncViewport);
     }
 }
 
