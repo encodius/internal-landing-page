@@ -186,45 +186,34 @@
     max-width: 760px;
 }
 
-/* ============================================
-   CONTACT SECTION
-   ============================================ */
-.contact-section {
-    padding-bottom: 140px;
+/* The full form lives on contact.html. The homepage keeps a compact
+   conversion point for both sides of the business. */
+.home-contact-cta {
+    scroll-margin-top: 96px;
+    padding: 112px 32px;
+    text-align: center;
+    background: var(--bg-inset);
+    border-top: 1px solid var(--border);
 }
 
-.contact-section .split {
-    gap: 72px;
-    align-items: start;
-    margin-top: 44px;
+.home-contact-cta .section-title {
+    margin: 18px auto 0;
+    max-width: 20ch;
 }
 
-.contact__lead {
+.home-contact-cta > p {
+    margin: 18px auto 0;
+    max-width: 54ch;
     color: var(--ink-secondary);
-    font-size: 17px;
-    max-width: 40ch;
-    margin-top: 24px;
+    font-size: 18px;
 }
 
-.contact__details {
-    margin-top: 36px;
-    display: grid;
+.home-contact-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 14px;
-    font-size: 17px;
-}
-
-.contact__details a {
-    font-weight: 500;
-    color: var(--ink);
-}
-
-.contact__details a:hover {
-    color: var(--accent);
-}
-
-.contact__details span {
-    color: var(--ink-muted);
-    font-size: 15px;
+    margin-top: 36px;
 }
 
 /* ============================================
@@ -255,7 +244,7 @@
     .section--dark .container {
         padding: 64px 20px;
     }
-    .contact-section {
-        padding-bottom: 96px;
+    .home-contact-cta {
+        padding: 80px 20px;
     }
 }

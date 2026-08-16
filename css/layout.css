@@ -77,6 +77,11 @@
     color: var(--dark-ink);
 }
 
+.nav__mobile-cta,
+.nav__menu-toggle {
+    display: none;
+}
+
 .nav__controls {
     margin-left: auto;
     display: flex;
@@ -177,22 +182,123 @@
         animation: none;
         opacity: 0;
     }
+
+    .nav__links {
+        transition: none;
+    }
 }
 
 @media (max-width: 768px) {
+    body.nav-open {
+        overflow: hidden;
+    }
+
+    body.nav-open::before {
+        content: '';
+        position: fixed;
+        inset: 68px 0 0;
+        z-index: 999;
+        background: rgba(3, 9, 20, 0.58);
+    }
+
+    .nav {
+        position: relative;
+        gap: 16px;
+    }
+
     .nav__controls {
         gap: 12px;
     }
-    /* Same reasoning as the CTA below — no room in the 68px bar until
-       there is a mobile menu. The footer still carries every link. */
+
     .nav__links {
-        display: none;
+        position: absolute;
+        top: 100%;
+        left: 20px;
+        right: 20px;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        max-height: calc(100vh - 88px);
+        overflow-y: auto;
+        padding: 10px 18px 20px;
+        background: var(--dark-bg);
+        border: 1px solid var(--dark-border);
+        border-top: 0;
+        border-radius: 0 0 var(--radius-md) var(--radius-md);
+        box-shadow: 0 22px 44px rgba(3, 9, 20, 0.42);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition:
+            opacity var(--transition-base),
+            visibility var(--transition-base),
+            transform var(--transition-base);
     }
-    /* The CTA overflows the 68px bar once the viewport is narrow. Dropped
-       until there is a mobile menu to hold it — the hero still carries a
-       "Request a demo" button, so the action is not lost. */
+
+    .header.menu-open .nav__links {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .nav__links > a:not(.nav__mobile-cta) {
+        width: 100%;
+        padding: 14px 4px;
+        border-bottom: 1px solid var(--dark-border);
+        font-size: 17px;
+    }
+
+    .nav__links .nav__mobile-cta {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 14px;
+        padding: 12px 20px;
+        color: #FFFFFF;
+        background: linear-gradient(135deg, #2F6FED, #1D4ED8);
+        border-radius: var(--radius-pill);
+        box-shadow: 0 6px 16px rgba(29, 78, 216, 0.28);
+    }
+
+    .nav__links .nav__mobile-cta:hover {
+        color: #FFFFFF;
+    }
+
     .nav__cta {
         display: none;
+    }
+
+    .nav__menu-toggle {
+        display: grid;
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+        place-items: center;
+        padding: 0;
+        background: transparent;
+        color: var(--dark-ink);
+        border: 1px solid var(--dark-border);
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+    }
+
+    .nav__menu-icon {
+        display: block;
+        width: 22px;
+        height: 22px;
+    }
+
+    .nav__menu-icon--close,
+    .header.menu-open .nav__menu-icon--open {
+        display: none;
+    }
+
+    .header.menu-open .nav__menu-icon--close {
+        display: block;
     }
 }
 

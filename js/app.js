@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initFooter();
     initSmoothScroll();
     initScrollTopTrigger();
+    initMobileNavigation();
     initHeaderScrollState();
     initContactForm();
     initHowItWorks();
@@ -63,6 +64,7 @@ function initLanguage() {
 function applyTranslations(lang) {
     const elements = document.querySelectorAll('[data-i18n]');
     const placeholders = document.querySelectorAll('[data-i18n-placeholder]');
+    const ariaLabels = document.querySelectorAll('[data-i18n-aria-label]');
 
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -76,10 +78,78 @@ function applyTranslations(lang) {
         if (translation) el.setAttribute('placeholder', translation);
     });
 
+    ariaLabels.forEach(el => {
+        const key = el.getAttribute('data-i18n-aria-label');
+        const translation = window.translations?.[lang]?.[key];
+        if (translation) el.setAttribute('aria-label', translation);
+    });
+
     const titleKey = document.body.getAttribute('data-i18n-title');
     if (titleKey) {
         const translation = window.translations?.[lang]?.[titleKey];
         if (translation) document.title = translation;
+    }
+}
+
+function getTranslation(key, fallback) {
+    const lang = document.documentElement.getAttribute('lang') || 'en';
+    return window.translations?.[lang]?.[key] || fallback;
+}
+
+// ============================================
+// MOBILE NAVIGATION
+// ============================================
+function initMobileNavigation() {
+    const header = document.getElementById('header');
+    const toggle = header?.querySelector('.nav__menu-toggle');
+    const menu = header?.querySelector('.nav__links');
+
+    if (!header || !toggle || !menu) return;
+
+    const desktopQuery = window.matchMedia('(min-width: 769px)');
+
+    function setOpen(isOpen, returnFocus = false) {
+        header.classList.toggle('menu-open', isOpen);
+        document.body.classList.toggle('nav-open', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+
+        const labelKey = isOpen ? 'nav.menuClose' : 'nav.menuOpen';
+        toggle.setAttribute('data-i18n-aria-label', labelKey);
+        toggle.setAttribute('aria-label', getTranslation(labelKey, isOpen ? 'Close menu' : 'Open menu'));
+
+        if (returnFocus) toggle.focus();
+    }
+
+    toggle.addEventListener('click', () => {
+        setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setOpen(false));
+    });
+
+    header.querySelector('.nav__logo')?.addEventListener('click', () => setOpen(false));
+
+    document.addEventListener('click', (event) => {
+        if (toggle.getAttribute('aria-expanded') === 'true' && !header.contains(event.target)) {
+            setOpen(false);
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+            setOpen(false, true);
+        }
+    });
+
+    const closeAtDesktop = (event) => {
+        if (event.matches) setOpen(false);
+    };
+
+    if (desktopQuery.addEventListener) {
+        desktopQuery.addEventListener('change', closeAtDesktop);
+    } else {
+        desktopQuery.addListener(closeAtDesktop);
     }
 }
 
@@ -98,8 +168,9 @@ function initContactForm() {
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalHTML = submitBtn.innerHTML;
 
-        submitBtn.innerHTML = '<span>Sending...</span>';
+        submitBtn.innerHTML = `<span>${getTranslation('contact.form.sending', 'Sending...')}</span>`;
         submitBtn.disabled = true;
+        form.setAttribute('aria-busy', 'true');
 
         try {
             const response = await fetch(form.action, {
@@ -111,19 +182,21 @@ function initContactForm() {
             const result = await response.json();
 
             if (result.success) {
-                formStatus.textContent = "Message sent successfully! We'll get back to you soon.";
+                formStatus.textContent = getTranslation('contact.form.success', "Message sent successfully. We'll get back to you soon.");
                 formStatus.className = 'form-status success';
                 form.reset();
             } else {
                 throw new Error(result.message || 'Failed to send');
             }
         } catch (error) {
-            formStatus.textContent = 'Something went wrong. Please try again or email us directly.';
+            formStatus.textContent = getTranslation('contact.form.error', 'Something went wrong. Please try again or email us directly.');
             formStatus.className = 'form-status error';
         }
 
         submitBtn.innerHTML = originalHTML;
         submitBtn.disabled = false;
+        form.removeAttribute('aria-busy');
+        applyTranslations(document.documentElement.getAttribute('lang') || 'en');
 
         setTimeout(() => {
             formStatus.className = 'form-status';

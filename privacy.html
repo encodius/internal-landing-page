@@ -31,10 +31,12 @@
                 <img class="nav__logo-mark" src="assets/icons/logo-mark.png" alt="" width="262" height="272">
                 <span class="nav__logo-text">Encodius</span>
             </a>
-            <div class="nav__links">
+            <div class="nav__links" id="site-menu">
                 <a href="product.html" data-i18n="nav.product">Product</a>
                 <a href="services.html" data-i18n="nav.services">Services</a>
                 <a href="company.html" data-i18n="nav.company">Company</a>
+                <a href="contact.html" data-i18n="nav.contact">Contact</a>
+                <a href="contact.html#form" class="nav__mobile-cta" data-i18n="nav.ctaDemo">Request a demo</a>
             </div>
             <div class="nav__controls">
                 <div class="lang-toggle">
@@ -42,7 +44,11 @@
                     <span>/</span>
                     <button type="button" data-lang-btn="sr">SR</button>
                 </div>
-                <a href="index.html#contact" class="nav__cta" data-i18n="nav.ctaDemo">Request a demo</a>
+                <a href="contact.html#form" class="nav__cta" data-i18n="nav.ctaDemo">Request a demo</a>
+                <button type="button" class="nav__menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu" data-i18n-aria-label="nav.menuOpen">
+                    <img class="nav__menu-icon nav__menu-icon--open" src="assets/icons/hamburger.svg" alt="" width="24" height="24">
+                    <img class="nav__menu-icon nav__menu-icon--close" src="assets/icons/close.svg" alt="" width="24" height="24">
+                </button>
             </div>
         </nav>
     </header>
@@ -142,7 +148,7 @@
                     <div class="footer__heading" data-i18n="footer.h.overview">Overview</div>
                     <a href="index.html#built-for" data-i18n="home.builtfor.eyebrow">Built for</a>
                     <a href="index.html#how" data-i18n="home.how.eyebrow">How it works</a>
-                    <a href="index.html#contact" data-i18n="home.contact.eyebrow">Contact</a>
+                    <a href="contact.html" data-i18n="nav.contact">Contact</a>
                 </nav>
 
                 <nav class="footer__col" aria-label="Pages">
@@ -155,7 +161,7 @@
 
                 <div class="footer__col footer__col--end">
                     <div class="footer__heading" data-i18n="footer.h.contact">Get in touch</div>
-                    <a class="footer__email" href="mailto:office@encodius.com">office@encodius.com</a>
+                    <span class="footer__email">office@encodius.com</span>
                 </div>
             </div>
             <div class="footer__bottom">

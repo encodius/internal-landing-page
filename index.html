@@ -76,10 +76,12 @@
                 <img class="nav__logo-mark" src="assets/icons/logo-mark.png" alt="" width="262" height="272">
                 <span class="nav__logo-text">Encodius</span>
             </button>
-            <div class="nav__links">
+            <div class="nav__links" id="site-menu">
                 <a href="product.html" data-i18n="nav.product">Product</a>
                 <a href="services.html" data-i18n="nav.services">Services</a>
                 <a href="company.html" data-i18n="nav.company">Company</a>
+                <a href="contact.html" data-i18n="nav.contact">Contact</a>
+                <a href="contact.html#form" class="nav__mobile-cta" data-i18n="nav.ctaDemo">Request a demo</a>
             </div>
             <div class="nav__controls">
                 <div class="lang-toggle">
@@ -87,7 +89,11 @@
                     <span>/</span>
                     <button type="button" data-lang-btn="sr">SR</button>
                 </div>
-                <a href="#contact" class="nav__cta" data-i18n="nav.ctaDemo">Request a demo</a>
+                <a href="contact.html#form" class="nav__cta" data-i18n="nav.ctaDemo">Request a demo</a>
+                <button type="button" class="nav__menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu" data-i18n-aria-label="nav.menuOpen">
+                    <img class="nav__menu-icon nav__menu-icon--open" src="assets/icons/hamburger.svg" alt="" width="24" height="24">
+                    <img class="nav__menu-icon nav__menu-icon--close" src="assets/icons/close.svg" alt="" width="24" height="24">
+                </button>
             </div>
         </nav>
     </header>
@@ -147,7 +153,7 @@
                 <h1><span data-i18n="home.hero.titleLead">Every fraud case, from the first alert to the </span><span class="hero__title-accent" data-i18n="home.hero.titleAccent">filed report</span><span data-i18n="home.hero.titleEnd">.</span></h1>
                 <p data-i18n="home.hero.desc">Correlis is case management for fraud teams at banks, insurers and gaming operators. Intake, investigation, legal deadlines, correspondence and a ten-year audit trail in one system.</p>
                 <div class="hero__actions">
-                    <a href="#contact" class="btn btn--primary" data-i18n="nav.ctaDemo">Request a demo</a>
+                    <a href="contact.html#form" class="btn btn--primary" data-i18n="nav.ctaDemo">Request a demo</a>
                 </div>
             </div>
 
@@ -251,43 +257,12 @@
     </section>
 
     <!-- Contact -->
-    <section class="page-section contact-section" id="contact" style="scroll-margin-top:96px;">
+    <section class="home-contact-cta" id="contact">
         <div class="eyebrow" data-i18n="home.contact.eyebrow">Contact</div>
-        <div class="split">
-            <div>
-                <h2 class="section-title" data-i18n="home.contact.title">Let's talk.</h2>
-                <p class="contact__lead" data-i18n="home.contact.lead">A demo of Correlis takes half an hour. For engineering work, tell us the shape of the problem and who is already on it.</p>
-                <div class="contact__details">
-                    <a href="mailto:office@encodius.com">office@encodius.com</a>
-                </div>
-            </div>
-            <div>
-                <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value="680263e7-1037-4d61-852b-f1b32b203f12">
-                    <input type="hidden" name="from_name" value="Encodius Contact Form">
-                    <input type="hidden" name="subject" value="New Contact from Encodius Website">
-                    <input type="hidden" name="redirect" value="https://encodius.com/#contact">
-                    <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
-                    <div class="form-group">
-                        <label for="f-subject" class="form-label" data-i18n="home.contact.form.subject">Subject</label>
-                        <input type="text" id="f-subject" name="topic" class="form-input" data-i18n-placeholder="home.contact.form.subjectPlaceholder" placeholder="Correlis demo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="f-email" class="form-label" data-i18n="home.contact.form.email">Email</label>
-                        <input type="email" id="f-email" name="email" class="form-input" placeholder="you@company.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="f-message" class="form-label" data-i18n="home.contact.form.message">Message</label>
-                        <textarea id="f-message" name="message" class="form-input form-input--textarea" data-i18n-placeholder="home.contact.form.messagePlaceholder" placeholder="What are you working on?" rows="5" required></textarea>
-                    </div>
-                    <div>
-                        <button type="submit" class="btn btn--primary btn--full">
-                            <span data-i18n="home.contact.form.submit">Send message</span>
-                        </button>
-                    </div>
-                </form>
-                <div class="form-status" id="form-status"></div>
-            </div>
+        <h2 class="section-title" data-i18n="home.contact.title">Let's talk.</h2>
+        <p data-i18n="home.contact.lead">A demo of Correlis takes half an hour. For engineering work, tell us the shape of the problem and who is already on it.</p>
+        <div class="home-contact-cta__actions">
+            <a href="contact.html#form" class="btn btn--primary" data-i18n="home.eng.cta">Talk to us</a>
         </div>
     </section>
 
@@ -307,7 +282,7 @@
                     <div class="footer__heading" data-i18n="footer.h.overview">Overview</div>
                     <a href="#built-for" data-i18n="home.builtfor.eyebrow">Built for</a>
                     <a href="#how" data-i18n="home.how.eyebrow">How it works</a>
-                    <a href="#contact" data-i18n="home.contact.eyebrow">Contact</a>
+                    <a href="contact.html" data-i18n="nav.contact">Contact</a>
                 </nav>
 
                 <nav class="footer__col" aria-label="Pages">
@@ -320,7 +295,7 @@
 
                 <div class="footer__col footer__col--end">
                     <div class="footer__heading" data-i18n="footer.h.contact">Get in touch</div>
-                    <a class="footer__email" href="mailto:office@encodius.com">office@encodius.com</a>
+                    <span class="footer__email">office@encodius.com</span>
                 </div>
             </div>
             <div class="footer__bottom">
