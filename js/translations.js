@@ -100,7 +100,7 @@ const translations = {
         'company.product.eyebrow': 'Product builders',
         'company.product.title': 'We build our own products, too.',
         'company.product.lead': 'We are the company behind Correlis, our fraud case management platform.',
-        'company.product.detail': 'Building our own software keeps us close to the same challenges our clients face — architecture, security, reliability, usability and long-term maintainability.',
+        'company.product.detail': 'Building our own software keeps us close to the same challenges our clients face - architecture, security, reliability, usability and long-term maintainability.',
         'company.cta.title': 'Build with Encodius',
 
         // ===== TERMS / LEGAL NOTICE =====
@@ -389,7 +389,7 @@ const translations = {
         'company.product.eyebrow': 'Gradimo proizvode',
         'company.product.title': 'Gradimo i sopstvene proizvode.',
         'company.product.lead': 'Mi stojimo iza Correlisa, naše platforme za vođenje predmeta prevara.',
-        'company.product.detail': 'Razvoj sopstvenog softvera drži nas blizu istih izazova sa kojima se susreću naši klijenti — arhitekture, bezbednosti, pouzdanosti, upotrebljivosti i dugoročnog održavanja.',
+        'company.product.detail': 'Razvoj sopstvenog softvera drži nas blizu istih izazova sa kojima se susreću naši klijenti - arhitekture, bezbednosti, pouzdanosti, upotrebljivosti i dugoročnog održavanja.',
         'company.cta.title': 'Gradite sa Encodiusom',
 
         // ===== USLOVI / PRAVNE INFORMACIJE =====
