@@ -1,98 +1,378 @@
 /* ============================================
    ENCODIUS - Company Page
-   Lean hero, team grid, closing CTA
+   Purpose, leadership, delivery model, product
    ============================================ */
 
 /* ============================================
-   HERO — text only; shorter than the product hero
-   since there is no screenshot to introduce
+   HERO
    ============================================ */
 .hero--company {
-    padding-bottom: 96px;
+    padding-bottom: 104px;
 }
 
 .hero--company .hero__inner {
-    max-width: 780px;
+    max-width: 860px;
 }
 
 .hero--company h1 {
-    font-size: clamp(38px, 4.6vw, 62px);
-    line-height: 1.05;
+    font-size: clamp(42px, 5.2vw, 72px);
+    line-height: 1.02;
+}
+
+.hero--company .hero__copy {
+    max-width: 67ch;
+    margin-top: 28px;
 }
 
 .hero--company .hero__desc {
-    margin-top: 26px;
+    max-width: none;
+    margin-top: 0;
     font-size: 18px;
-    max-width: 60ch;
+}
+
+.hero--company .hero__desc + .hero__desc {
+    margin-top: 14px;
 }
 
 /* ============================================
-   TEAM
+   SHARED SECTIONS
    ============================================ */
-.company-page {
+.company-section {
     padding: 112px 0;
+    scroll-margin-top: 80px;
 }
 
-.company-page__head {
+.company-section__inner {
+    width: 100%;
     max-width: var(--container-width);
     margin: 0 auto;
     padding: 0 32px;
 }
 
-.company-team {
-    max-width: 760px;
-    margin: 48px auto 0;
-    padding: 0 32px;
-}
-
-/* ============================================
-   CLOSING CTA — light, so it does not merge into
-   the dark footer directly beneath it
-   ============================================ */
-.company-cta {
-    background: var(--bg-inset);
-    border-top: 1px solid var(--border);
-    text-align: center;
-    padding: 112px 32px;
-}
-
-.company-cta h2 {
-    max-width: 20ch;
-    margin: 0 auto;
-}
-
-.company-cta p {
-    color: var(--ink-secondary);
-    font-size: 18px;
+.company-section__head .section-title {
+    max-width: 16ch;
     margin-top: 18px;
 }
 
-.company-cta .btn {
-    margin-top: 36px;
+/* ============================================
+   LEADERSHIP
+   ============================================ */
+.company-team {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+    margin-top: 56px;
+}
+
+.team-member--profile {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.82fr) minmax(0, 1.18fr);
+    min-height: 350px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: 0 18px 44px rgba(10, 24, 50, 0.06);
+    transition:
+        transform var(--transition-base),
+        box-shadow var(--transition-base),
+        border-color var(--transition-base);
+    height: 100%;
+}
+
+.team-member--profile .team-member__photo {
+    height: 100%;
+    min-height: 350px;
+    aspect-ratio: auto;
+    border: 0;
+    border-right: 1px solid var(--border);
+    border-radius: 0;
+}
+
+.team-member--profile .team-member__photo img {
+    object-position: 50% 28%;
+}
+
+.team-member__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 34px 30px;
+}
+
+.team-member--profile .team-member__name {
+    margin-top: 0;
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.team-member--profile .team-member__role {
+    margin-top: 8px;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.team-member__bio {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--ink-secondary);
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+/* ============================================
+   DELIVERY MODEL
+   ============================================ */
+.company-scale-section {
+    background:
+        radial-gradient(circle at 80% 10%, rgba(47, 111, 237, 0.2), transparent 31%),
+        var(--dark-bg);
+}
+
+.company-scale {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 88px;
+    align-items: start;
+}
+
+.company-scale__intro .section-title {
+    margin-top: 18px;
+    color: var(--dark-ink);
+}
+
+.company-scale__intro .section-lead {
+    max-width: 46ch;
+    margin-top: 22px;
+    color: var(--dark-ink-secondary);
+    font-size: 18px;
+}
+
+.company-scale__body {
+    padding-top: 5px;
+}
+
+.company-scale__body > p {
+    color: var(--dark-ink-secondary);
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.company-capabilities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+    list-style: none;
+}
+
+.company-capabilities li {
+    padding: 10px 15px;
+    color: var(--dark-ink-muted);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--dark-border);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.025em;
+    transition:
+        transform var(--transition-base),
+        box-shadow var(--transition-base),
+        background-color var(--transition-base),
+        border-color var(--transition-base),
+        color var(--transition-base);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .team-member--profile:hover {
+        transform: translateY(-4px);
+        border-color: var(--border-strong);
+        box-shadow: 0 28px 68px rgba(10, 24, 50, 0.14);
+    }
+
+    .company-capabilities li:hover {
+        transform: translateY(-3px);
+        color: var(--dark-ink);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(138, 180, 248, 0.48);
+        box-shadow: 0 10px 24px rgba(29, 78, 216, 0.26);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .team-member--profile,
+    .company-capabilities li {
+        transition: none;
+    }
+
+    .team-member--profile:hover,
+    .company-capabilities li:hover {
+        transform: none;
+    }
+}
+
+.company-scale__body .company-scale__outcome {
+    margin-top: 30px;
+    padding-top: 28px;
+    color: var(--dark-ink);
+    border-top: 1px solid var(--dark-border);
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+/* ============================================
+   OWN PRODUCT
+   ============================================ */
+.company-product {
+    padding: 112px 0;
+    background: var(--bg);
+}
+
+.company-product__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+    gap: 96px;
+    align-items: start;
+}
+
+.company-product .section-title {
+    max-width: 12ch;
+    margin-top: 18px;
+    color: var(--ink);
+}
+
+.company-product__body {
+    padding-top: 5px;
+}
+
+.company-product__lead {
+    max-width: 36ch;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -0.012em;
+}
+
+.company-product__body > p + p {
+    max-width: 48ch;
+    margin-top: 20px;
+    color: var(--ink-secondary);
+    font-size: 18px;
+    line-height: 1.65;
+}
+
+.company-product__body .btn {
+    margin-top: 32px;
 }
 
 /* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 1100px) {
-    .company-page {
-        padding: 88px 0;
+    .company-section,
+    .company-product {
+        padding-top: 88px;
+        padding-bottom: 88px;
+    }
+
+    .company-team {
+        gap: 24px;
+    }
+
+    .team-member--profile {
+        grid-template-columns: minmax(0, 1fr);
+        min-height: 0;
+    }
+
+    .team-member--profile .team-member__photo {
+        min-height: 0;
+        aspect-ratio: 4 / 3;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .team-member__content {
+        justify-content: flex-start;
+    }
+
+    .company-scale,
+    .company-product__inner {
+        gap: 56px;
     }
 }
 
 @media (max-width: 760px) {
     .hero--company {
-        padding-bottom: 64px;
+        padding-bottom: 72px;
     }
-    .company-page {
-        padding: 64px 0;
+
+    .hero--company .hero__copy {
+        margin-top: 24px;
     }
-    .company-page__head,
-    .company-team {
-        padding-left: 20px;
+
+    .company-section,
+    .company-product {
+        padding-top: 72px;
+        padding-bottom: 72px;
+    }
+
+    .company-section__inner {
         padding-right: 20px;
+        padding-left: 20px;
     }
-    .company-cta {
-        padding: 80px 20px;
+
+    .company-team,
+    .company-scale,
+    .company-product__inner {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .company-team {
+        gap: 32px;
+        margin-top: 40px;
+    }
+
+    .team-member--profile .team-member__photo {
+        aspect-ratio: 1;
+    }
+
+    .team-member__content {
+        padding: 28px 24px 30px;
+    }
+
+    .team-member__bio {
+        margin-top: 20px;
+        padding-top: 20px;
+    }
+
+    .company-scale,
+    .company-product__inner {
+        gap: 42px;
+    }
+
+    .company-scale__body,
+    .company-product__body {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 420px) {
+    .team-member--profile .team-member__photo {
+        aspect-ratio: 4 / 5;
+    }
+
+    .company-capabilities {
+        gap: 8px;
     }
 }
